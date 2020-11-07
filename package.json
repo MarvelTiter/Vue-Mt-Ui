@@ -2,10 +2,12 @@
   "name": "vuecomponentcompiler",
   "version": "0.1.0",
   "private": true,
+  "main":"lib/mt-ui.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name mt-ui --dest lib packages/index.js"
   },
   "dependencies": {
     "core-js": "^3.6.5",
