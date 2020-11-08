@@ -10,18 +10,20 @@ ul {
     list-style: none;
 }
 
-.mt-input-group  {
+.mt-input-group {
     display: inline-table !important;
     border-collapse: separate;
     border-spacing: 0;
-  }
-  .mt-input-group .mt-input__inner {
+}
+
+.mt-input-group .mt-input__inner {
     vertical-align: middle;
     display: table-cell;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
-  }
-  .mt-input__prepend {
+}
+
+.mt-input__prepend {
     background-color: #f5f7fa;
     color: #909399;
     vertical-align: middle;
@@ -31,12 +33,13 @@ ul {
     border-radius: 4px;
     padding: 0 20px;
     width: 1px;
-  
+    white-space: nowrap;
     border-right: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-  }
-  .mt-input__inner {
+}
+
+.mt-input__inner {
     padding: 0 10px;
     height: 35px;
     line-height: 35px;
@@ -46,9 +49,9 @@ ul {
     border-radius: 4px;
     width: 100%;
     box-sizing: border-box;
-  }
-  
-  .mt-input__inner:focus {
+}
+
+.mt-input__inner:focus {
     border: 1px solid #409eff;
     outline: 0;
-  }
+}
