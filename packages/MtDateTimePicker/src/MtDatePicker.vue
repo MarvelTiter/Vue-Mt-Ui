@@ -118,7 +118,7 @@ export default {
 			];
 			if (
 				this.isLeapYear(this.globalDate.getFullYear()) &&
-				this.Month == 2
+				this.Month == 1
 			)
 				monDays++;
 			var d = this.globalDate.getDate();
