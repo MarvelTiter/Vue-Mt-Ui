@@ -9,7 +9,7 @@ import MtDateTimePicker from './../packages/MtDateTimePicker'
 import MtPagination from './../packages/MtPagination'
 import MtLoading from './../packages/MtLoading'
 import MtIcon from './../packages/MtIcon'
-import MtMenu from './../packages/MtMenu'
+import MtTree from './../packages/MtTree'
 import MtDot from './../packages/MtDot'
 import MtDialog from './../packages/MtDialog'
 import MtUniformGrid from './../packages/MtUniformGrid'
@@ -20,7 +20,7 @@ Vue.use(MtDateTimePicker)
 Vue.use(MtPagination)
 Vue.use(MtLoading)
 Vue.use(MtIcon)
-Vue.use(MtMenu)
+Vue.use(MtTree)
 Vue.use(MtDot)
 Vue.use(MtDialog)
 Vue.use(MtUniformGrid)

@@ -1,21 +1,21 @@
 <template>
-	<div class="mt-menu">
-		<ul v-for="(m,key) in menulist" :key="key">
-			<mt-menu-item :data="m" :level="1"></mt-menu-item>
+	<div class="mt-tree">
+		<ul v-for="(m,key) in nodeList" :key="key">
+			<mt-tree-item :data="m" :level="1"></mt-tree-item>
 		</ul>
 	</div>
 </template>
 <script>
-import MtMenuItem from "./MtMenuItem.vue";
+import MtTreeItem from "./MtTreeItem.vue";
 export default {
-	name: "MtMenu",
+	name: "MtTree",
 	provide() {
 		return {
-			rootMenu: this,
+			root: this,
 		};
 	},
 	props: {
-		menu: {
+		nodes: {
 			type: [Array, Object],
 			required: true,
 		},
@@ -26,7 +26,7 @@ export default {
 	},
 	data() {
 		return {
-			menulist: this.menu,
+			nodeList: this.nodes,
 			activeItem: {},
 			activePath: "",
 			left: this.leftSpace,
@@ -34,29 +34,29 @@ export default {
 	},
 	watch: {
 		activePath() {
-			this.$emit("menu-nav", this.activePath);
+			this.$emit("tree-nav", this.activePath);
 		},
-		menu(newValue) {
-			this.menulist = newValue;
+		nodes(newValue) {
+			this.nodeList = newValue;
 		},
 	},
 	computed: {},
 	components: {
-		MtMenuItem,
+		MtTreeItem,
 	},
 	methods: {},
 	mounted() {},
 };
 </script>
 <style scoped>
-.mt-menu {
+.mt-tree {
 	text-align: left;
 }
-.mt-menu ul {
+.mt-tree ul {
 	height: 100%;
 	transition: all 0.2s;
 }
-.mt-menu ul li {
+.mt-tree ul li {
 	box-sizing: border-box;
 }
 </style>

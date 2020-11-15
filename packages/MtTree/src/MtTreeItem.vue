@@ -1,15 +1,14 @@
 <template>
 	<li>
-		<div class="mt-menu-item" @click.stop="handleMenuClick" :class="{actived:isActived}" :style="fontSize">
+		<div class="mt-tree-item" @click.stop="handleNodeClick" :class="{actived:isActived}" :style="fontSize">
 			<div class="title-area" :style="paddingLeft">
 				<mt-icon :name="data.icon"></mt-icon>
 				<span>{{ data.title }}</span>
 				<mt-icon name="arrow3" v-if="hasChild" class="arrow" :class="{rotate:visible}"></mt-icon>
 			</div>
-			<ul class="sub-menu-list" v-show="visible" v-if="hasChild">
-				<mt-menu-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index">
-
-				</mt-menu-item>
+			<ul class="sub-node-list" v-show="visible" v-if="hasChild">
+				<mt-tree-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index">
+				</mt-tree-item>
 			</ul>
 		</div>
 	</li>
@@ -18,8 +17,8 @@
 <script>
 import MtIcon from "../../MtIcon/src/MtIcon.vue";
 export default {
-	name: "MtMenuItem",
-	inject: ["rootMenu"],
+	name: "MtTreeItem",
+	inject: ["root"],
 	props: {
 		data: {
 			type: [Array, Object],
@@ -44,7 +43,7 @@ export default {
 		},
 		paddingLeft() {
 			var style = {};
-			var l = this.rootMenu.left;
+			var l = this.root.left;
 			style["padding-left"] = (this.level - 1) * l + 10 + "px";
 			return style;
 		},
@@ -54,7 +53,7 @@ export default {
 			return style;
 		},
 		isActived() {
-			var actived = this.rootMenu.activeItem;
+			var actived = this.root.activeItem;
 			return (
 				actived &&
 				actived.itemLevel == this.itemLevel &&
@@ -67,11 +66,11 @@ export default {
 		MtIcon,
 	},
 	methods: {
-		handleMenuClick() {
+		handleNodeClick() {
 			this.visible = !this.visible;
 			if (this.hasChild) return;
-			this.rootMenu.activeItem = this;
-			this.rootMenu.activePath = this.data.path;
+			this.root.activeItem = this;
+			this.root.activePath = this.data.path;
 		},
 		handle() {
 			this.end = true;
@@ -84,7 +83,7 @@ export default {
 li {
 	padding: 0;
 }
-.mt-menu-item {
+.mt-tree-item {
 	margin: 0;
 	color: white;
 	box-sizing: border-box;
@@ -101,7 +100,7 @@ li {
 	background-color: rgb(84, 92, 100);
 	cursor: pointer;
 }
-.mt-menu-item .arrow {
+.mt-tree-item .arrow {
 	transition: all 0.2s;
 	vertical-align: middle;
 	display: inline-block;
@@ -111,17 +110,17 @@ li {
 	margin-top: -8px;
 }
 
-.mt-menu-item .arrow.rotate {
+.mt-tree-item .arrow.rotate {
 	transform: rotate(180deg);
 }
 
-.sub-menu-list {
+.sub-node-list {
 	padding-top: 5px;
 	/* transform-origin: top;
 	transform: scaleY(0);
 	transition: all 0.2s; */
 }
-.sub-menu-list.open {
+.sub-node-list.open {
 	display: block;
 	transform: scaleY(1);
 }
