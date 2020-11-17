@@ -13,6 +13,7 @@ import MtTree from './../packages/MtTree'
 import MtDot from './../packages/MtDot'
 import MtDialog from './../packages/MtDialog'
 import MtUniformGrid from './../packages/MtUniformGrid'
+import MtMessage from './../packages/MtMessage'
 
 Vue.use(MtInput)
 Vue.use(MtSelect)
@@ -25,7 +26,7 @@ Vue.use(MtDot)
 Vue.use(MtDialog)
 Vue.use(MtUniformGrid)
 Vue.config.productionTip = false
-
+Vue.$message = MtMessage
 new Vue({
   router,
   render: h => h(App)

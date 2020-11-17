@@ -34,7 +34,7 @@ export default {
 	},
 	watch: {
 		activePath() {
-			this.$emit("tree-nav", this.activePath);
+			this.$emit("actived-change", this.activePath);
 		},
 		nodes(newValue) {
 			this.nodeList = newValue;

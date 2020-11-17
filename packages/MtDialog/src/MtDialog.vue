@@ -1,17 +1,20 @@
 <template>
-	<div class="mt-dialog-wrapper" :class="{ visible: show }" style="z-index: 2001" @click="close">
-		<div class="mt-dialog" style="margin-top: 15vh" :style="style" @click.stop>
-			<div class="mt-dialog-header" :class="{ 'mt-dialog-center': isCenter }">
-				<slot name="header">
-					<span class="mt-dialog-title">{{ digTitle }}</span>
-				</slot>
-				<input class="mt-dialog-headerbtn" type="button" value="X" @click="close" />
-			</div>
-			<div class="mt-dialog-body">
-				<slot></slot>
+	<transition name="fade">
+		<div class="mt-dialog-wrapper" v-show="show" style="z-index: 2001" @click.self="close">
+			<div class="mt-dialog" style="margin-top: 15vh" :style="style">
+				<div class="mt-dialog-header" :class="{ 'mt-dialog-center': isCenter }">
+					<slot name="header">
+						<span class="mt-dialog-title">{{ digTitle }}</span>
+					</slot>
+					<input class="mt-dialog-headerbtn" type="button" value="X" @click.self="close" />
+				</div>
+				<div class="mt-dialog-body">
+					<slot></slot>
+				</div>
 			</div>
 		</div>
-	</div>
+	</transition>
+
 </template>
 
 <script>
@@ -84,11 +87,7 @@ export default {
 	overflow: auto;
 	margin: 0;
 	background-color: rgba(0, 0, 0, 0.3);
-	display: none;
-}
-
-.mt-dialog-wrapper.visible {
-	display: block;
+	/* display: none; */
 }
 
 .mt-dialog {
@@ -145,5 +144,13 @@ h6 {
 	color: #606266;
 	font-size: 14px;
 	word-break: break-all;
+}
+
+.mt-dialog-fade-enter-active {
+	transition: all 0.3s ease;
+}
+.mt-dialog-fade-enter, .mt-dialog-fade-leave-to
+/* .slide-fade-leave-active for below version 2.1.8 */ {
+	opacity: 0;
 }
 </style>

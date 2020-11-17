@@ -6,10 +6,13 @@
 				<span>{{ data.title }}</span>
 				<mt-icon name="arrow3" v-if="hasChild" class="arrow" :class="{rotate:visible}"></mt-icon>
 			</div>
-			<ul class="sub-node-list" v-show="visible" v-if="hasChild">
-				<mt-tree-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index">
-				</mt-tree-item>
-			</ul>
+			<transition name="scaley">
+				<ul class="sub-node-list" v-show="visible" v-if="hasChild">
+					<mt-tree-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index">
+					</mt-tree-item>
+				</ul>
+			</transition>
+
 		</div>
 	</li>
 </template>
@@ -120,10 +123,10 @@ li {
 	transform: scaleY(0);
 	transition: all 0.2s; */
 }
-.sub-node-list.open {
+/* .sub-node-list.open {
 	display: block;
 	transform: scaleY(1);
-}
+} */
 .actived {
 	color: #40e9ff;
 	text-shadow: 0px 0px 5px rgba(160, 201, 254, 1);

@@ -1,5 +1,5 @@
 <template>
-	<i class="iconfont" :class="'icon-'+name"></i>
+	<i class="mt-icon iconfont" :class="'icon-'+name"></i>
 </template>
 
 <script>

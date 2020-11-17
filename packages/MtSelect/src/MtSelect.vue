@@ -90,6 +90,7 @@ export default {
 	watch: {
 		selectedValue: function (v) {
 			this.selValue = v;
+			this.currentText = this.comDis(this.selValue);
 		},
 		data: function (e) {
 			this.searchList = e;
@@ -115,7 +116,7 @@ export default {
 			this.$emit("change", val);
 			this.itemShow = false;
 		},
-		close: function () {
+		close: function (e) {
 			if (!this.active) {
 				this.itemShow = false;
 				window.removeEventListener("click", this.close);
@@ -158,7 +159,7 @@ export default {
 	transform: scaleY(0);
 	transition: all 0.2s;
 	min-width: 150px;
-	z-index: 999;
+	z-index: 9999;
 }
 
 .mt-select .optionWrap.panelvisible {

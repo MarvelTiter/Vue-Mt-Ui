@@ -10,6 +10,35 @@ ul {
     list-style: none;
 }
 
+.fade-enter-active {
+    transition: all 0.3s ease;
+}
+
+.fade-enter,
+.fade-leave-to {
+    opacity: 0;
+}
+
+.fade-enter-to,
+.fade-leave {
+    opacity: 1;
+}
+
+.scaley-enter-active {
+    transition: all 0.3s ease;
+    transform-origin: 0 0;
+}
+
+.scaley-enter,
+.scaley-leave-to {
+    transform: scaleY(0);
+}
+
+.scaley-enter-to,
+.scaley-leave {
+    opacity: scaleY(1);
+}
+
 .mt-input-group {
     display: inline-table !important;
     border-collapse: separate;
