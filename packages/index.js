@@ -13,6 +13,7 @@ import MtIcon from "./MtIcon";
 import MtTree from "./MtTree";
 import MtUniformGrid from "./MtUniformGrid";
 import MtMessage from "./MtMessage";
+import { MtTable, MtTableColumn } from "./MtTable";
 const components = [
     MtCard,
     MtDateTimePicker,
@@ -26,7 +27,9 @@ const components = [
     MtIcon,
     MtTree,
     MtUniformGrid,
-    MtMessage
+    MtMessage,
+    MtTable,
+    MtTableColumn
 ];
 const install = function(Vue) {
     if (install.installed) return;
@@ -52,5 +55,7 @@ export default {
     MtIcon,
     MtTree,
     MtUniformGrid,
-    MtMessage
+    MtMessage,
+    MtTable,
+    MtTableColumn
 };

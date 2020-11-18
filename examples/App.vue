@@ -9,6 +9,13 @@
 			<TableColumn prop="age" label="年龄"></TableColumn>
 			<TableColumn prop="address" label="地址"></TableColumn>
 		</Table>
+		<mt-table :source="data" stripe border>
+			<!-- <MtTableColumn label="选择" type="selection"></MtTableColumn> -->
+			<MtTableColumn prop="name" label="姓名">
+			</MtTableColumn>
+			<MtTableColumn prop="age" label="年龄"></MtTableColumn>
+			<MtTableColumn prop="address" label="地址"></MtTableColumn>
+		</mt-table>
 	</div>
 </template>
 <script>
@@ -18,8 +25,6 @@ const columns = [
 		key: "name",
 		slots: {
 			title: "customTitle",
-		},
-		scopedSlots: {
 			customRender: "name",
 		},
 	},
@@ -148,6 +153,10 @@ export default {
 			console.log(p);
 		},
 		handleClick() {},
+		show(d) {
+			console.log(d);
+			return "1";
+		},
 	},
 };
 </script>
