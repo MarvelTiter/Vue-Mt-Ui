@@ -36,7 +36,7 @@ import TableBody from './tableBody'
 import TableHead from './head'
 
 export default {
-  name: 'vTable',
+  name: 'VTable',
   componentName: 'table',
   data () {
     return {

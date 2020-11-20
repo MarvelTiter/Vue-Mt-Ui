@@ -1,4 +1,5 @@
-import "./assets/base.css";
+import "./assets/base.scss";
+import "./assets/_table.scss";
 import "./assets/iconfont.css";
 import MtCard from "./MtCard";
 import MtDateTimePicker from "./MtDateTimePicker";
@@ -13,7 +14,9 @@ import MtIcon from "./MtIcon";
 import MtTree from "./MtTree";
 import MtUniformGrid from "./MtUniformGrid";
 import MtMessage from "./MtMessage";
+import MtButton from "./MtButton";
 import { MtTable, MtTableColumn } from "./MtTable";
+import { VTable, VColumn } from "./table";
 const components = [
     MtCard,
     MtDateTimePicker,
@@ -29,7 +32,10 @@ const components = [
     MtUniformGrid,
     MtMessage,
     MtTable,
-    MtTableColumn
+    MtTableColumn,
+    MtButton,
+    VTable,
+    VColumn
 ];
 const install = function(Vue) {
     if (install.installed) return;
@@ -57,5 +63,8 @@ export default {
     MtUniformGrid,
     MtMessage,
     MtTable,
-    MtTableColumn
+    MtTableColumn,
+    MtButton,
+    VTable,
+    VColumn
 };

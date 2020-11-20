@@ -1,64 +1,66 @@
 <template>
-	<div class="mt-date-picker" :class="{ 'mt-input-group': IsPrepended }">
-		<div class="mt-input__prepend" v-show="IsPrepended">
-			{{ prefix }}
-		</div>
+	<div class="mt-date-picker">
 		<div class="mt-date-picker-wrap" @mouseover="active = true" @mouseout="active = false">
-			<input class="mt-input__inner" placeholder="选择日期" @focus="show" v-model="content" :style="style" />
-			<div class="mt-date-picker-panel" :class="{ panelvisible: itemShow }">
-				<div class="header">
-					<div class="arrow pre" @click="preMonth"></div>
-					<div>
-						<span>{{ Fullyear }}</span>
-						<span>年</span>
-						<span>{{ Month + 1 }}</span>
-						<span>月</span>
+			<!-- <input class="mt-input__inner" placeholder="选择日期" @focus="show" v-model="content" :style="style" /> -->
+			<mt-input placeholder="选择日期" @focus="show" v-model="content" :width="width" :label="label" :disabled="disabled">
+				<div class="mt-date-picker-panel" :class="{ panelvisible: itemShow }">
+					<div class="header">
+						<div class="arrow pre" @click="preMonth"></div>
+						<div>
+							<span>{{ Fullyear }}</span>
+							<span>年</span>
+							<span>{{ Month + 1 }}</span>
+							<span>月</span>
+						</div>
+						<div class="arrow next" @click="nextMonth"></div>
 					</div>
-					<div class="arrow next" @click="nextMonth"></div>
-				</div>
-				<table cellspacing="0" cellpadding="0">
-					<tr>
-						<th v-for="(day, key) of weekDays" :key="key">{{ day }}</th>
-					</tr>
-					<tr v-for="(days, key) of TotalDays" :key="key">
-						<td v-for="(d, key) of days" :key="key" @click="handleTDClick(d)" :class="{
+					<table cellspacing="0" cellpadding="0">
+						<tr>
+							<th v-for="(day, key) of weekDays" :key="key">{{ day }}</th>
+						</tr>
+						<tr v-for="(days, key) of TotalDays" :key="key">
+							<td v-for="(d, key) of days" :key="key" @click="handleTDClick(d)" :class="{
                 forbidden: d.type == 0,
                 currentmonth: d.type == 1,
-                today: d.today,
+                today: IsToday(d),
+				selected: IsSelected(d)
               }">
-							{{ d.day }}
-						</td>
-					</tr>
-				</table>
-			</div>
+								<span>{{ d.day }}</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</mt-input>
 		</div>
 	</div>
 </template>
 
 <script>
+import MtInput from "./../../MtInput";
 export default {
 	name: "MtDatePicker",
 	props: {
-		width: {
-			type: String,
-			default: "",
-		},
-		label: {
-			type: String,
-			default: "",
-		},
+		width: String,
+		label: String,
+		disabled: Boolean,
 		format: {
 			type: String,
 			default: "yyyy-MM-dd",
 		},
 		value: {
-			type: String,
-			default: "",
+			type: Date,
+			default: function () {
+				return new Date();
+			},
 		},
+	},
+	components: {
+		MtInput,
 	},
 	data: function () {
 		return {
-			globalDate: new Date(),
+			globalDate: this.value,
+			selectedDate: this.value,
 			weekDays: ["日", "一", "二", "三", "四", "五", "六"],
 			itemShow: false,
 			prefix: this.label,
@@ -72,31 +74,42 @@ export default {
 			this.fmt = val;
 		},
 		value: function (val) {
-			this.content = val;
+			this.selectedDate = val;
+			this.FmtDate();
 		},
 		label: function (val) {
 			this.prefix = val;
 		},
 	},
 	computed: {
-		IsPrepended() {
-			if (this.prefix) return true;
-			else return false;
-		},
-		style: function () {
-			var s = {};
-			if (this.width) {
-				if (!isNaN(this.width)) this.width = this.width + "px";
-				s.width = this.width;
-			}
-			return s;
-		},
-		Fullyear: function () {
+		Fullyear() {
 			return this.globalDate.getFullYear();
 		},
-		Month: function () {
+		Month() {
 			return this.globalDate.getMonth();
 		},
+		Date() {
+			return this.globalDate.getDate();
+		},
+		TodayFullyear() {
+			return new Date().getFullYear();
+		},
+		TodayMonth() {
+			return new Date().getMonth();
+		},
+		TodayDate() {
+			return new Date().getDate();
+		},
+		SelectedFullyear() {
+			return this.selectedDate.getFullYear();
+		},
+		SelectedMonth() {
+			return this.selectedDate.getMonth();
+		},
+		SelectedDate() {
+			return this.selectedDate.getDate();
+		},
+
 		TotalDays: function () {
 			var dates = [];
 			//
@@ -108,7 +121,6 @@ export default {
 				dates.push({
 					type: 0,
 					day: fd.getDate(),
-					today: false,
 				});
 			}
 			dates.reverse();
@@ -121,12 +133,10 @@ export default {
 				this.Month == 1
 			)
 				monDays++;
-			var d = this.globalDate.getDate();
 			for (var index = 1; index <= monDays; index++) {
 				dates.push({
 					type: 1,
 					day: index,
-					today: d == index,
 				});
 			}
 			//
@@ -137,7 +147,6 @@ export default {
 				dates.push({
 					type: 0,
 					day: index,
-					today: false,
 				});
 			}
 			var res = [];
@@ -154,18 +163,40 @@ export default {
 	methods: {
 		handleTDClick: function (d) {
 			if (d.type == 0) return;
-			this.content = this.FmtDate(d);
-			this.$emit("input", this.content);
+			var day = (d && d.day) || new Date().getDate();
+			this.selectedDate = new Date(this.Fullyear, this.Month, day);
+			this.content = this.FmtDate();
+			this.$emit("input", this.selectedDate);
 			this.itemShow = false;
 		},
-		FmtDate: function (d) {
-			var year = this.Fullyear;
-			var mon = this.Month + 1;
-			var day = (d && d.day) || new Date().getDate();
-			return this.fmt
-				.replace("yyyy", year)
-				.replace("MM", this.padLeft0(mon, 2))
-				.replace("dd", this.padLeft0(day, 2));
+		IsToday(day) {
+			if (day.type == 0) return;
+			let index = day.day;
+			return (
+				index == this.TodayDate &&
+				this.Month == this.TodayMonth &&
+				this.Fullyear == this.TodayFullyear
+			);
+		},
+		IsSelected(day) {
+			if (day.type == 0) return;
+			let index = day.day;
+			return (
+				index == this.SelectedDate &&
+				this.Month == this.SelectedMonth &&
+				this.Fullyear == this.SelectedFullyear
+			);
+		},
+		FmtDate: function () {
+			this.$nextTick(() => {
+				let year = this.SelectedFullyear;
+				let mon = this.SelectedMonth + 1;
+				let day = this.SelectedDate;
+				this.content = this.fmt
+					.replace("yyyy", year)
+					.replace("MM", this.padLeft0(mon, 2))
+					.replace("dd", this.padLeft0(day, 2));
+			});
 		},
 		nextMonth: function () {
 			var d = new Date(this.globalDate);
@@ -207,36 +238,36 @@ export default {
 };
 </script>
 
-<style scope>
+<style scope lang="scss">
 .mt-date-picker {
 	display: inline-block;
 	width: 100%;
-}
+	.mt-date-picker-wrap {
+		width: 100%;
+		.mt-date-picker-panel {
+			width: 320px;
+			border: 1px solid #e4e7ed;
+			padding: 8px;
+			position: absolute;
+			box-sizing: border-box;
+			color: #606266;
+			line-height: 30px;
+			box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+			background-color: #fff;
+			border-radius: 4px;
+			transform-origin: 0 0;
+			transform: scaleY(0);
+			opacity: 0;
+			transition: all 0.2s;
+			margin-top: 10px;
+			z-index: 999;
+		}
 
-.mt-date-picker-wrap {
-	width: 100%;
-}
-
-.mt-date-picker-panel {
-	width: 320px;
-	border: 1px solid #e4e7ed;
-	padding: 8px;
-	position: absolute;
-	box-sizing: border-box;
-	color: #606266;
-	line-height: 30px;
-	box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
-	background-color: #fff;
-	border-radius: 4px;
-	transform-origin: 0 0;
-	transform: scaleY(0);
-	transition: all 0.2s;
-	margin-top: 10px;
-	z-index: 999;
-}
-
-.mt-date-picker-panel.panelvisible {
-	transform: scaleY(1);
+		.mt-date-picker-panel.panelvisible {
+			transform: scaleY(1);
+			opacity: 1;
+		}
+	}
 }
 
 .mt-date-picker-panel .header {
@@ -288,6 +319,14 @@ export default {
 
 .mt-date-picker-panel table td.today {
 	color: #409eff;
+	font-weight: 700;
+	span {
+		border-bottom: 2px solid #409eff;
+	}
+}
+.mt-date-picker-panel table td.selected {
+	color: #6ab4e6;
+	box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
 	font-weight: 700;
 }
 

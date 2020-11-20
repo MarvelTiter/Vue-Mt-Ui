@@ -42,6 +42,9 @@ export default {
 		column(newValue) {
 			this.columns = newValue;
 		},
+		source(newValue) {
+			this.data = newValue;
+		},
 	},
 	components: {
 		TableHeader,

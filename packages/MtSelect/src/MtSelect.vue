@@ -1,27 +1,24 @@
 <template>
-	<div class="mt-select" :class="{ 'mt-input-group': IsPrepended }">
-		<div class="mt-input__prepend" v-show="IsPrepended">
-			{{ prefix }}
-		</div>
+	<div class="mt-select">
 		<div class="input-wrap" @mouseover="active = true" @mouseout="active = false">
-			<input class="mt-input__inner" placeholder="请选择" @keyup="search" v-model="currentText" @focus="show" :style="style" :disabled="disabled" />
-			<ul class="optionWrap" :class="{ panelvisible: itemShow }">
-				<li class="optionItem" @click="handleOptionClick(s)" v-for="(s, key) of searchList" :key="key">
-					{{ s[displayMember] }}
-				</li>
-			</ul>
+			<!-- <input class="mt-input__inner" placeholder="请选择" @keyup="search" v-model="currentText" @focus="show" :style="style" :disabled="disabled" /> -->
+			<mt-input placeholder="请选择" @keyup="search" v-model="currentText" :label="label" @focus="show" :width="width" :disabled="disabled">
+				<ul class="optionWrap" :class="{ panelvisible: itemShow }">
+					<li class="optionItem" @click="handleOptionClick(s)" v-for="(s, key) of searchList" :key="key">
+						{{ s[displayMember] }}
+					</li>
+				</ul>
+			</mt-input>
 		</div>
 	</div>
 </template>
 
 <script>
+import MtInput from "./../../MtInput";
 export default {
 	name: "MtSelect",
 	props: {
-		label: {
-			type: String,
-			default: undefined,
-		},
+		label: String,
 		data: {
 			type: Array,
 			required: true,
@@ -38,14 +35,11 @@ export default {
 			type: String,
 			default: "",
 		},
-		width: {
-			type: String,
-			default: "",
-		},
-		disabled: {
-			type: Boolean,
-			default: false,
-		},
+		width: String,
+		disabled:Boolean,
+	},
+	components: {
+		MtInput,
 	},
 	data: function () {
 		return {
@@ -133,7 +127,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scope lang="scss">
 .mt-select {
 	display: inline-block;
 	width: 100%;
@@ -157,6 +151,7 @@ export default {
 	background-color: #fff;
 	transform-origin: 0 0;
 	transform: scaleY(0);
+	opacity: 0;
 	transition: all 0.2s;
 	min-width: 150px;
 	z-index: 9999;
@@ -164,6 +159,7 @@ export default {
 
 .mt-select .optionWrap.panelvisible {
 	transform: scaleY(1);
+	opacity: 1;
 }
 
 .mt-select .optionWrap .optionItem {
@@ -174,6 +170,7 @@ export default {
 	height: 35px;
 	line-height: 35px;
 	text-align: left;
+	white-space: nowrap;
 }
 
 .mt-select .optionWrap .optionItem:hover {

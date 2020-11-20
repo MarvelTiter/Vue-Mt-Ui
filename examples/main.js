@@ -1,7 +1,7 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import "./../packages/assets/base.css";
+import "./../packages/assets/base.scss";
 import "./../packages/assets/iconfont.css";
 import MtInput from "./../packages/MtInput";
 import MtSelect from "./../packages/MtSelect";
@@ -14,9 +14,12 @@ import MtDot from "./../packages/MtDot";
 import MtDialog from "./../packages/MtDialog";
 import MtUniformGrid from "./../packages/MtUniformGrid";
 import MtMessage from "./../packages/MtMessage";
+import MtCard from "./../packages/MtCard";
 import { MtTable, MtTableColumn } from "./../packages/MtTable";
+import { VTable, VColumn } from "./../packages/table";
 
 Vue.use(MtInput);
+Vue.use(MtCard);
 Vue.use(MtSelect);
 Vue.use(MtDateTimePicker);
 Vue.use(MtPagination);
@@ -28,6 +31,8 @@ Vue.use(MtDialog);
 Vue.use(MtUniformGrid);
 Vue.use(MtTable);
 Vue.use(MtTableColumn);
+Vue.use(VTable);
+Vue.use(VColumn);
 Vue.config.productionTip = false;
 Vue.$message = MtMessage;
 new Vue({

@@ -92,11 +92,11 @@ li {
 	box-sizing: border-box;
 }
 .title-area span {
-	margin-left: 5px;
+	margin-left: 3px;
 }
 .title-area {
 	position: relative;
-	padding: 10px 5px;
+	padding: 6px 5px;
 	box-sizing: border-box;
 }
 .title-area:hover {

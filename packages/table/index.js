@@ -3,7 +3,14 @@
  <Column label="title" prop="title"></akColumn>
  </Table>
  * */
-import Table from './table'
-import TableColumn from './column'
+import VTable from './table'
+import VColumn from './column'
 
-export {Table, TableColumn}
+VTable.install = function(Vue){
+    Vue.component(VTable.name,VTable);
+}
+VColumn.install = function(Vue){
+    Vue.component(VColumn.name,VColumn);
+}
+
+export {VTable, VColumn}

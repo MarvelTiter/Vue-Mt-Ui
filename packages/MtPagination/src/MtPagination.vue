@@ -46,6 +46,9 @@ export default {
 		total: function (val) {
 			this.totalCount = val;
 		},
+		pageIndex(val) {
+			this.current = val;
+		},
 	},
 	computed: {
 		TotalPage: function () {

@@ -1,6 +1,6 @@
 <script>
 export default {
-	name: "Column",
+	name: "VColumn",
 	componentName: "Column",
 	data() {
 		return {
