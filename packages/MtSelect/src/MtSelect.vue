@@ -25,18 +25,18 @@ export default {
 		},
 		display: {
 			type: String,
-			required: true,
+			default: 'text',
 		},
 		value: {
 			type: String,
-			required: true,
+			default: 'value',
 		},
 		selectedValue: {
 			type: String,
 			default: "",
 		},
 		width: String,
-		disabled:Boolean,
+		disabled: Boolean,
 	},
 	components: {
 		MtInput,
@@ -56,7 +56,7 @@ export default {
 	},
 	model: {
 		prop: "selectedValue",
-		event: "click",
+		event: "input",
 	},
 	computed: {
 		style: function () {
@@ -66,16 +66,7 @@ export default {
 				s.width = this.width;
 			}
 			return s;
-		},
-		comDis: function () {
-			var self = this;
-			return function (v) {
-				for (var i = 0; i < self.list.length; i++) {
-					var e = self.list[i];
-					if (e[self.valueMember] == v) return e[self.displayMember];
-				}
-			};
-		},
+		},		
 		IsPrepended() {
 			if (this.prefix) return true;
 			else return false;
@@ -84,7 +75,6 @@ export default {
 	watch: {
 		selectedValue: function (v) {
 			this.selValue = v;
-			this.currentText = this.comDis(this.selValue);
 		},
 		data: function (e) {
 			this.searchList = e;
@@ -96,17 +86,24 @@ export default {
 		},
 	},
 	methods: {
+		comDis(v) {
+			for (var i = 0; i < this.list.length; i++) {
+				var e = this.list[i];
+				if (e[this.valueMember] == v) return e[this.displayMember];
+			}
+		},
 		search: function (e) {
-			var self = this;
-			this.searchList = this.list.filter(function (item) {
-				return item[self.displayMember].indexOf(e.target.value) != -1;
+			var keyword = e.target.value;
+			this.currentText = keyword;
+			this.searchList = this.list.filter((item) => {
+				return item[this.displayMember].indexOf(keyword) != -1;
 			});
-			this.$emit("click", this.currentText);
+			this.$emit("input", this.currentText);
 		},
 		handleOptionClick: function (val) {
 			this.currentText = val[this.displayMember];
 			this.selValue = val[this.valueMember];
-			this.$emit("click", this.selValue);
+			this.$emit("input", this.selValue);
 			this.$emit("change", val);
 			this.itemShow = false;
 		},

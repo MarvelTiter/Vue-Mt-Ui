@@ -3,11 +3,6 @@
 		<button @click="handleClick">
 			Toggle render
 		</button>
-		<VTable :data="data">
-			<VColumn prop="name" label="姓名"></VColumn>
-			<VColumn prop="age" label="年龄"></VColumn>
-			<VColumn prop="address" label="地址"></VColumn>
-		</VTable>
 		<mt-table :source="data" stripe border>
 			<!-- <MtTableColumn label="选择" type="selection"></MtTableColumn> -->
 			<MtTableColumn prop="name" label="姓名">
@@ -15,35 +10,8 @@
 			<MtTableColumn prop="age" label="年龄"></MtTableColumn>
 			<MtTableColumn prop="address" label="地址"></MtTableColumn>
 		</mt-table>
-		<!-- <mt-card>
-			<mt-uniform-grid :column="8">
-				<mt-select :data="data" display="address" value="key" label="111" v-model="selected"></mt-select>
-				<mt-date-picker v-model="today" label="111"></mt-date-picker>
-				<mt-input label="111" prefix="粤A" v-model="inputText">
-					<template #preSlot>
-						1
-					</template>
-				</mt-input>
-				<MtButton>默认按钮</MtButton>
-				<MtButton>默认按钮</MtButton>
-				<MtButton>默认按钮</MtButton>
-				<MtButton>默认按钮</MtButton>
-				<MtButton>默认按钮</MtButton>
-				<MtButton>默认按钮</MtButton>
-				<MtButton type="primary" icon="user" @click="handleClick" acceptEnter>主要按钮</MtButton>
-				<MtButton type="success">成功按钮</MtButton>
-				<MtButton type="success" size="medium">成功按钮</MtButton>
-
-				<MtButton type="success" size="small">成功按钮</MtButton>
-				<MtButton type="success" size="mini">成功按钮</MtButton>
-
-				<MtButton type="text">文本</MtButton>
-			</mt-uniform-grid>
-
-		</mt-card> -->
-		<mt-input disabled></mt-input>
-		<mt-select disabled></mt-select>
-		<mt-date-picker disabled></mt-date-picker>
+		<mt-select :data="HPZLList" v-model="HPZL"></mt-select>
+		<mt-select :data="JYJGList" v-model="JYJG"></mt-select>
 	</div>
 </template>
 <script>
@@ -108,75 +76,16 @@ const data = [
 ];
 import "./../packages/assets/_table.scss";
 import MtButton from "./../packages/MtButton";
+import TestData from "./data";
 export default {
 	data() {
 		return {
 			visible: false,
 			loading: false,
-			inputText: "",
-			queryObject: {
-				JYZL: "jy",
-			},
-			selected: "",
-			today: new Date(),
-			data: data,
-			responseObject: {},
-			menu: [
-				{
-					icon: "",
-					path: "",
-					title: "哈师大是1",
-					children: [
-						{
-							icon: "",
-							path: "",
-							title: "哈师大是2",
-							children: [
-								{
-									icon: "",
-									path: "",
-									title: "哈师大是3",
-								},
-								{
-									icon: "",
-									path: "",
-									title: "哈师大是3",
-								},
-								{
-									icon: "",
-									path: "",
-									title: "哈师大是3",
-								},
-								{
-									icon: "",
-									path: "",
-									title: "哈师大是3",
-								},
-								{
-									icon: "",
-									path: "",
-									title: "哈师大是3",
-								},
-							],
-						},
-					],
-				},
-				{
-					icon: "",
-					path: "",
-					title: "哈师大是3",
-				},
-				{
-					icon: "",
-					path: "",
-					title: "哈师大是3",
-				},
-				{
-					icon: "",
-					path: "",
-					title: "哈师大是3",
-				},
-			],
+			HPZLList: TestData.HPZLList,
+			HPZL:'#',
+			JYJGList: TestData.JYJGList,
+			JYJG:'#',
 		};
 	},
 	components: { MtButton },
@@ -185,7 +94,7 @@ export default {
 			console.log(p);
 		},
 		handleClick() {
-			console.log("primary btn");
+			this.data = data;
 		},
 		show(d) {
 			console.log(d);
@@ -215,5 +124,4 @@ export default {
 #nav a.router-link-exact-active {
 	color: #42b983;
 }
-
 </style>

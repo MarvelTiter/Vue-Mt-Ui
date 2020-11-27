@@ -15,7 +15,7 @@
 import TableTd from "./TableTd";
 export default {
 	name: "TableBody",
-	inject: ["table"],
+	props: ["columns",'data'],
 	data() {
 		return {
 			columns: [],
@@ -26,10 +26,6 @@ export default {
 	components: { TableTd },
 	methods: {},
 	mounted() {
-		this.$nextTick(() => {
-			this.columns = this.table.columns;
-			this.data = this.table.data;
-		});
 	},
 };
 </script>

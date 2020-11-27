@@ -10,7 +10,7 @@
 		{hover:true}
 		]">
 			<table-header></table-header>
-			<table-body></table-body>
+			<table-body :data="data" :columns="columns"></table-body>
 		</table>
 	</div>
 </template>
