@@ -9,7 +9,7 @@
 		{ellipsis:ellipsis},
 		{hover:true}
 		]">
-			<table-header></table-header>
+			<table-header :head-info="headers"></table-header>
 			<table-body :data="data" :columns="columns"></table-body>
 		</table>
 	</div>
@@ -24,6 +24,7 @@ export default {
 			headers: [],
 			columns: this.column,
 			data: this.source,
+			selected: [],
 		};
 	},
 	provide() {
@@ -51,6 +52,9 @@ export default {
 		TableBody,
 	},
 	methods: {
+		handleSelected() {
+			this.$emit("select-change", this.selected);
+		},
 		_resolveColumns(head, list, parentId, layer) {
 			list.forEach((col) => {
 				let temp = col;

@@ -4,7 +4,16 @@
 		<div class="mt-input__prepend" v-if="IsPrepended">
 			<slot name="preSlot">{{ prefix }}</slot>
 		</div>
-		<input :class="{'mt-input__inner':true,prepended:IsPrepended}" :style="style" :placeholder="holder" v-model="content" @input="valueChanged" @keyup="handleKeyup" @focus="handleFocus" :disabled="disabled" autocomplete="false" />
+		<input :class="{'mt-input__inner':true,prepended:IsPrepended}" 
+		:style="style" 
+		:placeholder="holder" 
+		v-model="content" 
+		@input="valueChanged" 
+		@keyup="handleKeyup" 
+		@focus="handleFocus" 
+		:disabled="disabled" 
+		autocomplete="false"
+		:readonly="readonly" />
 		<slot></slot>
 	</div>
 </template>
@@ -16,6 +25,7 @@ export default {
 		label: String,
 		prefix: String,
 		disabled: Boolean,
+		readonly: Boolean,
 		placeholder: {
 			type: String,
 			default: "",

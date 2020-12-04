@@ -40,6 +40,7 @@ export default {
 			}
 			// return row[column.prop];
 			if (column.type === "selection") {
+				return <input type="checkbox"></input>
 			}
 			if (column.type === "index") {
 				return $index + 1;

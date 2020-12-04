@@ -38,7 +38,10 @@ export default {
 		};
 	},
 	watch: {
-		current: function (val) {
+		current: function (val,old) {
+			if (this.TotalPage === 0) {
+				return;
+			}
 			if (val < 1) this.current = 1;
 			else if (val > this.TotalPage) this.current = this.TotalPage;
 			this.$emit("index-change", this.current);
@@ -54,19 +57,17 @@ export default {
 		TotalPage: function () {
 			return Math.ceil(this.totalCount / this.size);
 		},
-		padLeft: function () {
-			return function (val) {
-				var len = (this.TotalPage + "").length;
-				return this.padLeft0(val, len);
-			};
+		len: function () {
+			var len = (this.TotalPage + "").length;
+			return len;
 		},
 	},
 	methods: {
-		padLeft0: function (num, length) {
-			if ((num + "").length >= length) {
+		padLeft: function (num) {
+			if ((num + "").length >= this.len) {
 				return num;
 			}
-			return this.padLeft("0" + num, length);
+			return this.padLeft("0" + num);
 		},
 	},
 };
@@ -110,5 +111,6 @@ export default {
 	padding: 5px;
 	box-sizing: border-box;
 	border: 1px solid #dcdfe6;
+	outline: 0;
 }
 </style>

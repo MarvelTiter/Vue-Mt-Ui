@@ -4,14 +4,19 @@
 			Toggle render
 		</button>
 		<mt-table :source="data" stripe border>
-			<!-- <MtTableColumn label="选择" type="selection"></MtTableColumn> -->
+			<MtTableColumn label="选择" type="selection" width="80"></MtTableColumn>
 			<MtTableColumn prop="name" label="姓名">
+				<MtTableColumn prop="name" label="姓名">
+				</MtTableColumn>
+				<MtTableColumn prop="name" label="姓名">
+				</MtTableColumn>
 			</MtTableColumn>
 			<MtTableColumn prop="age" label="年龄"></MtTableColumn>
 			<MtTableColumn prop="address" label="地址"></MtTableColumn>
 		</mt-table>
 		<mt-select :data="HPZLList" v-model="HPZL"></mt-select>
 		<mt-select :data="JYJGList" v-model="JYJG"></mt-select>
+		<mt-pagination :total=0></mt-pagination>
 	</div>
 </template>
 <script>
@@ -83,10 +88,16 @@ export default {
 			visible: false,
 			loading: false,
 			HPZLList: TestData.HPZLList,
-			HPZL:'#',
+			HPZL: "#",
 			JYJGList: TestData.JYJGList,
-			JYJG:'#',
+			JYJG: "#",
+			data:[]
 		};
+	},
+	watch: {
+		HPZL(v) {
+			console.log(v);
+		},
 	},
 	components: { MtButton },
 	methods: {
@@ -95,6 +106,8 @@ export default {
 		},
 		handleClick() {
 			this.data = data;
+			this.HPZL = "01";
+			this.JYJG = "4400000254";
 		},
 		show(d) {
 			console.log(d);

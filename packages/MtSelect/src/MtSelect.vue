@@ -2,7 +2,7 @@
 	<div class="mt-select">
 		<div class="input-wrap" @mouseover="active = true" @mouseout="active = false">
 			<!-- <input class="mt-input__inner" placeholder="请选择" @keyup="search" v-model="currentText" @focus="show" :style="style" :disabled="disabled" /> -->
-			<mt-input placeholder="请选择" @keyup="search" v-model="currentText" :label="label" @focus="show" :width="width" :disabled="disabled">
+			<mt-input placeholder="请选择" @keyup="search" v-model="currentText" :label="label" @focus="show" :width="width" :disabled="disabled" :readonly="!filtable">
 				<ul class="optionWrap" :class="{ panelvisible: itemShow }">
 					<li class="optionItem" @click="handleOptionClick(s)" v-for="(s, key) of searchList" :key="key">
 						{{ s[displayMember] }}
@@ -21,20 +21,23 @@ export default {
 		label: String,
 		data: {
 			type: Array,
-			required: true,
+			default: function(){
+				return [];
+			},
 		},
-		display: {
+		optionLabel: {
 			type: String,
-			default: 'text',
+			default: "text",
+		},
+		optionValue: {
+			type: String,
+			default: "value",
 		},
 		value: {
 			type: String,
-			default: 'value',
-		},
-		selectedValue: {
-			type: String,
 			default: "",
 		},
+		filtable: Boolean,
 		width: String,
 		disabled: Boolean,
 	},
@@ -45,18 +48,13 @@ export default {
 		return {
 			prefix: this.label,
 			itemShow: false,
-			valueMember: this.value,
-			displayMember: this.display,
+			valueMember: this.optionValue,
+			displayMember: this.optionLabel,
 			currentText: "",
-			selValue: this.selectedValue,
 			searchList: this.data,
 			list: this.data,
 			active: false,
 		};
-	},
-	model: {
-		prop: "selectedValue",
-		event: "input",
 	},
 	computed: {
 		style: function () {
@@ -66,33 +64,38 @@ export default {
 				s.width = this.width;
 			}
 			return s;
-		},		
+		},
 		IsPrepended() {
 			if (this.prefix) return true;
 			else return false;
 		},
 	},
 	watch: {
-		selectedValue: function (v) {
-			this.selValue = v;
+		value: function (v) {
+			this.updateLabel(v);
 		},
 		data: function (e) {
 			this.searchList = e;
 			this.list = e;
-			this.currentText = this.comDis(this.selValue);
+			this.updateLabel();
 		},
 		label: function (val) {
 			this.Label = val;
 		},
 	},
 	methods: {
-		comDis(v) {
+		updateLabel(v) {
+			var val = v || this.value;
 			for (var i = 0; i < this.list.length; i++) {
 				var e = this.list[i];
-				if (e[this.valueMember] == v) return e[this.displayMember];
+				if (e[this.valueMember] == val) {
+					this.currentText = e[this.displayMember];
+					return;
+				}
 			}
 		},
 		search: function (e) {
+			if (!this.filtable) return;
 			var keyword = e.target.value;
 			this.currentText = keyword;
 			this.searchList = this.list.filter((item) => {
@@ -101,9 +104,8 @@ export default {
 			this.$emit("input", this.currentText);
 		},
 		handleOptionClick: function (val) {
-			this.currentText = val[this.displayMember];
-			this.selValue = val[this.valueMember];
-			this.$emit("input", this.selValue);
+			var value = val[this.valueMember];
+			this.$emit("input", value);
 			this.$emit("change", val);
 			this.itemShow = false;
 		},
@@ -115,11 +117,12 @@ export default {
 		},
 		show: function () {
 			this.itemShow = true;
+			this.searchList = this.list;
 			window.addEventListener("click", this.close);
 		},
 	},
 	mounted: function () {
-		this.currentText = this.comDis(this.selValue);
+		this.updateLabel();
 	},
 };
 </script>

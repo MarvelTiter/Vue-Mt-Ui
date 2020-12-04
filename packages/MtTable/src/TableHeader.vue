@@ -13,10 +13,9 @@ export default {
 	// props: {
 	// 	headInfo: [Array, Object],
 	// },
-	inject: ["table"],
+	props: ["table","headInfo"],
 	data() {
 		return {
-			headInfo: this.table.headers,
 		};
 	},
 	computed: {

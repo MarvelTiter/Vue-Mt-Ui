@@ -18,8 +18,6 @@ export default {
 	props: ["columns",'data'],
 	data() {
 		return {
-			columns: [],
-			data: [],
 		};
 	},
 	computed: {},
