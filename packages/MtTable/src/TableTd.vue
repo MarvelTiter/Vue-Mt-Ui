@@ -5,6 +5,16 @@ export default {
 	data() {
 		return {};
 	},
+	inject: ["root"],
+	watch: {
+		"rowData.selected": function (newValue, oldValue) {
+			if (this.column.type !== "selection") return;
+			if (newValue === oldValue) return;
+			if (!this.root.handleSelectAll) {
+				this.root.selectChange();
+			}
+		},
+	},
 	computed: {},
 	components: {},
 	methods: {},
@@ -14,9 +24,13 @@ export default {
 		const column = this.column; // 列信息
 		const colIndex = this.columnIndex;
 		const rowIndex = this.rowIndex;
+		const title = column.title || data[column.prop];
 		return (
-			<td style={"text-align:" + column.align} class="mt-table__table_td">
-				{this.column.renderCell(data, column, rowIndex)}
+			<td
+				style={"text-align:" + column.align}
+				title={this.root.showTitle ? title : ""}
+			>
+				{this.column.renderCell(h, data, column, rowIndex)}
 			</td>
 		);
 	},

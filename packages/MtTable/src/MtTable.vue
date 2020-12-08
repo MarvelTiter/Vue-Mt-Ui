@@ -9,8 +9,16 @@
 		{ellipsis:ellipsis},
 		{hover:true}
 		]">
-			<table-header :head-info="headers"></table-header>
-			<table-body :data="data" :columns="columns"></table-body>
+			<colgroup>
+				<col v-for="(col,index) in colWidth" :width="col" :key="index">
+			</colgroup>
+			<table-header :columns="columns" :head-info="headers"></table-header>
+			<tbody v-if="this.data.length === 0">
+				<tr>
+					<td :colspan="this.columns.length" class="empty">{{emptyText}}</td>
+				</tr>
+			</tbody>
+			<table-body v-else :data="data" :columns="columns"></table-body>
 		</table>
 	</div>
 </template>
@@ -22,22 +30,38 @@ export default {
 	data() {
 		return {
 			headers: [],
-			columns: this.column,
+			columns: this.column || [],
 			data: this.source,
-			selected: [],
+			bakData: null,
+			colWidth: [],
+			handleSelectAll: false,
 		};
 	},
 	provide() {
 		return {
-			table: this,
+			root: this,
 		};
 	},
 	props: {
 		column: [Array, Object],
 		source: [Array, Object],
-		stripe: Boolean,
-		border: Boolean,
-		ellipsis: Boolean,
+		showTitle: Boolean,
+		emptyText: {
+			type: String,
+			default: "暂无数据",
+		},
+		stripe: {
+			type: Boolean,
+			default: true,
+		},
+		border: {
+			type: Boolean,
+			default: true,
+		},
+		ellipsis: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	watch: {
 		column(newValue) {
@@ -52,8 +76,33 @@ export default {
 		TableBody,
 	},
 	methods: {
-		handleSelected() {
-			this.$emit("select-change", this.selected);
+		sort(prop, type) {
+			if (this.bakData == null) this.bakData = this.data.slice();
+			if (type === 0) {
+				this.data = this.bakData.slice();
+			} else
+				this.data.sort(function (a, b) {
+					if (type == 1) {
+						return b[prop] - a[prop];
+					} else if (type == 2) {
+						return a[prop] - b[prop];
+					}
+				});
+		},
+		selectChange(checkAll) {
+			if (typeof checkAll !== "undefined") {
+				this.handleSelectAll = true;
+				this.ChangeState(checkAll);
+			}
+			var selected = this.data.filter((row) => {
+				return row.selected;
+			});
+			this.$emit("select-change", selected);
+		},
+		ChangeState(state) {
+			this.data.forEach((d) => {
+				this.$set(d, "selected", state);
+			});
 		},
 		_resolveColumns(head, list, parentId, layer) {
 			list.forEach((col) => {
@@ -82,6 +131,7 @@ export default {
 					} else {
 						if (temp.type !== "extend") {
 							head.push(children);
+							this.colWidth.push(temp.width);
 						}
 						this.columns.push(temp);
 					}
@@ -96,8 +146,7 @@ export default {
 		},
 	},
 	mounted() {
-		if (!this.columns) {
-			this.columns = [];
+		if (this.columns.length === 0) {
 			this.InitColumns();
 		}
 	},

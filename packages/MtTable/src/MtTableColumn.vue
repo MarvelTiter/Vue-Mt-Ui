@@ -3,15 +3,19 @@ export default {
 	render(h) {
 		return <div>{this.$slots.default}</div>;
 	},
+	inject: ["root"],
 	name: "MtTableColumn",
 	data() {
 		return {
 			renderCell: null,
+			sortType: 0,
 		};
 	},
 	props: {
 		prop: String,
 		label: String,
+		width: [String, Number],
+		sortable: Boolean,
 		align: {
 			// left/right/center
 			default: "center",
@@ -26,11 +30,25 @@ export default {
 			},
 		},
 	},
-	computed: {},
+	computed: {
+		asc() {
+			return this.sortType === 1;
+		},
+		desc() {
+			return this.sortType === 2;
+		},
+	},
 	components: {},
-	methods: {},
+	methods: {
+		sort() {
+			this.root.sort(this.prop, this.sortType);
+		},
+		clearHandleSelectAll(){
+			this.root.handleSelectAll = false;
+		}
+	},
 	created() {
-		this.renderCell = (row, column, $index) => {
+		this.renderCell = (h, row, column, $index) => {
 			if (this.$scopedSlots["default"]) {
 				const data = {
 					row: row,
@@ -40,7 +58,13 @@ export default {
 			}
 			// return row[column.prop];
 			if (column.type === "selection") {
-				return <input type="checkbox"></input>
+				return (
+					<input
+						type="checkbox"
+						v-model={row.selected}
+						onClick={this.clearHandleSelectAll}
+					></input>
+				);
 			}
 			if (column.type === "index") {
 				return $index + 1;

@@ -59,8 +59,8 @@ export default {
 	},
 	data: function () {
 		return {
-			globalDate: this.value,
-			selectedDate: this.value,
+			globalDate: this.value || new Date(),
+			selectedDate: this.value || new Date(),
 			weekDays: ["日", "一", "二", "三", "四", "五", "六"],
 			itemShow: false,
 			prefix: this.label,
@@ -291,6 +291,7 @@ export default {
 
 .mt-date-picker-panel table th {
 	padding: 5px;
+	height: 40px;
 	border-bottom: 1px solid #ebeef5;
 	color: #606266;
 	font-weight: 400;
@@ -301,7 +302,7 @@ export default {
 	padding: 4px 0;
 	text-align: center;
 	width: 32px;
-	height: 30px;
+	height: 38px;
 	box-sizing: border-box;
 	text-align: center;
 	cursor: pointer;

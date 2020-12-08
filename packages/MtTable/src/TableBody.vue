@@ -1,7 +1,7 @@
 <template>
 	<tbody>
 		<template v-for="(row,rowIndex) of data">
-			<tr :key="rowIndex" class="mt-table__table_td_tr">
+			<tr :key="rowIndex">
 				<TableTd v-for="(col,colIndex) of columns" :column="col" :row-index="rowIndex" :column-index="colIndex" :key="colIndex" :row-data="row">
 
 				</TableTd>

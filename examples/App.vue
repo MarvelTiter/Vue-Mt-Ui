@@ -3,20 +3,29 @@
 		<button @click="handleClick">
 			Toggle render
 		</button>
-		<mt-table :source="data" stripe border>
-			<MtTableColumn label="选择" type="selection" width="80"></MtTableColumn>
-			<MtTableColumn prop="name" label="姓名">
-				<MtTableColumn prop="name" label="姓名">
-				</MtTableColumn>
-				<MtTableColumn prop="name" label="姓名">
-				</MtTableColumn>
-			</MtTableColumn>
-			<MtTableColumn prop="age" label="年龄"></MtTableColumn>
-			<MtTableColumn prop="address" label="地址"></MtTableColumn>
+		<mt-table :source="data" @select-change="selectHandle">
+			<MtTableColumn type="selection" width="80"></MtTableColumn>
+			<MtTableColumn prop="name" label="姓名"></MtTableColumn>
+			<MtTableColumn prop="age" label="年龄" sortable></MtTableColumn>
+			<MtTableColumn prop="address" label="地址" sortable></MtTableColumn>
 		</mt-table>
-		<mt-select :data="HPZLList" v-model="HPZL"></mt-select>
-		<mt-select :data="JYJGList" v-model="JYJG"></mt-select>
-		<mt-pagination :total=0></mt-pagination>
+		<mt-uniform-grid :column="6">
+			<mt-uniform-grid :column="4" :colspan="5">
+				<mt-date-picker label="开始日期" format="yyyy-MM-dd" v-model="date"></mt-date-picker>
+				<mt-date-picker label="结束日期" format="yyyy-MM-dd"></mt-date-picker>
+				<mt-select label="号牌种类" v-model="HPZL" :data="HPZLList" filtable></mt-select>
+				<mt-select label="机构名称"></mt-select>
+				<mt-input label="I P 地 址"></mt-input>
+				<mt-input label="操作人员" v-model="CZY"></mt-input>
+				<mt-input label="事件标志"></mt-input>
+				<mt-input label="事件描述"></mt-input>
+			</mt-uniform-grid>
+			<mt-uniform-grid :column="1">
+				<mt-button type="primary">查询(Enter)</mt-button>
+			</mt-uniform-grid>
+		</mt-uniform-grid>
+		<!-- <mt-select label="号牌种类" v-model="HPZL" :data="HPZLList"></mt-select> -->
+
 	</div>
 </template>
 <script>
@@ -73,7 +82,15 @@ const data = [
 	{
 		key: "3",
 		name: "Joe Black",
-		age: 32,
+		age: 22,
+		address:
+			"Sidney No. 1 Lake Park Sidney No. 1 Lake Park Sidney No. 1 Lake Park",
+		tags: ["cool", "teacher"],
+	},
+	{
+		key: "4",
+		name: "Joe Black2",
+		age: 12,
 		address:
 			"Sidney No. 1 Lake Park Sidney No. 1 Lake Park Sidney No. 1 Lake Park",
 		tags: ["cool", "teacher"],
@@ -91,27 +108,27 @@ export default {
 			HPZL: "#",
 			JYJGList: TestData.JYJGList,
 			JYJG: "#",
-			data:[]
+			data: [],
+			CZY: "",
+			date: null,
 		};
 	},
 	watch: {
-		HPZL(v) {
-			console.log(v);
-		},
+		HPZL(v) {},
 	},
 	components: { MtButton },
 	methods: {
-		nav(p) {
-			console.log(p);
-		},
+		nav(p) {},
 		handleClick() {
 			this.data = data;
 			this.HPZL = "01";
 			this.JYJG = "4400000254";
 		},
 		show(d) {
-			console.log(d);
 			return "1";
+		},
+		selectHandle(rows) {
+			console.log(rows);
 		},
 	},
 };

@@ -127,13 +127,13 @@ export default {
 	}
 
 	&.small {
-		padding: 8px 13px;
+		padding: 7px 12px;
 		font-size: 12px;
 		border-radius: 3px;
 	}
 
 	&.mini {
-		padding: 7px 12px;
+		padding: 4px 10px;
 		font-size: 12px;
 		border-radius: 3px;
 	}
