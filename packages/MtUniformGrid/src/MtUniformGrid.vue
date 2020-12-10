@@ -85,7 +85,7 @@ export default {
 		},
 		Padding() {
 			return {
-				padding: this.gutter + "px" + " 0px",
+				padding: this.gutter + "px",
 			};
 		},
 	},
@@ -97,6 +97,7 @@ export default {
 			// return this.children[index];
 		},
 		FilterNode() {
+			if (this.$slots.default === undefined) return;
 			var filterNode = this.$slots.default.filter(function (slot) {
 				if (slot.tag) return slot;
 			});
@@ -105,6 +106,9 @@ export default {
 		},
 		CellSpan(row, col) {
 			var node = this.SelectNode(row, col);
+			if (node.child === undefined) {
+				return { col: 1, row: 1 };
+			}
 			var c = node.child.colspan;
 			var r = node.child.rowspan;
 			return {
@@ -114,7 +118,6 @@ export default {
 		},
 	},
 	created() {
-		this.FilterNode();
 		this.renderCell = (row, col) => {
 			var node = this.SelectNode(row, col);
 			return node;
@@ -136,6 +139,7 @@ export default {
 .mt-uniform-grid .cell {
 	border: none;
 	vertical-align: middle;
-	text-align: center;
+	text-align: center;	
+	position: relative;
 }
 </style>

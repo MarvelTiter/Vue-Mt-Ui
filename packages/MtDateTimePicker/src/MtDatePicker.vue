@@ -48,7 +48,7 @@ export default {
 			default: "yyyy-MM-dd",
 		},
 		value: {
-			type: Date,
+			type: [Date, String],
 			default: function () {
 				return new Date();
 			},
@@ -59,8 +59,8 @@ export default {
 	},
 	data: function () {
 		return {
-			globalDate: this.value || new Date(),
-			selectedDate: this.value || new Date(),
+			globalDate: this.ConvertDateString(this.value),
+			selectedDate: this.ConvertDateString(this.value),
 			weekDays: ["日", "一", "二", "三", "四", "五", "六"],
 			itemShow: false,
 			prefix: this.label,
@@ -74,7 +74,7 @@ export default {
 			this.fmt = val;
 		},
 		value: function (val) {
-			this.selectedDate = val;
+			this.selectedDate = this.ConvertDateString(val);
 			this.FmtDate();
 		},
 		label: function (val) {
@@ -230,6 +230,16 @@ export default {
 				return num;
 			}
 			return this.padLeft0("0" + num, length);
+		},
+		ConvertDateString(val) {
+			if (typeof val === "object") return val || new Date();
+			var reg = /(\d{4})[-|/|.](\d{1,2})[-|/|.](\d{1,2})/g;
+			if (reg.test(val)) {
+				var year = RegExp.$1;
+				var mon = RegExp.$2;
+				var day = RegExp.$3;
+				return new Date(year, mon - 1, day);
+			}
 		},
 	},
 	mounted: function () {

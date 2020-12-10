@@ -7,7 +7,7 @@
 			<li class="btn" @click="current--">上一页</li>
 			<li class="btn" @click="current++">下一页</li>
 			<li class="btn" @click="current = TotalPage">尾页</li>
-			<li><input placeholder="页数" v-model="skipIndex" /></li>
+			<li><input placeholder="页数" autocomplete="off" v-model="skipIndex" /></li>
 			<li class="btn" @click="current = skipIndex">跳转</li>
 		</ul>
 	</div>
@@ -38,10 +38,9 @@ export default {
 		};
 	},
 	watch: {
-		current: function (val,old) {
-			if (this.TotalPage === 0) {
-				return;
-			}
+		current: function (val) {
+			if (this.TotalPage === 0) return;
+			if (isNaN(val)) return;
 			if (val < 1) this.current = 1;
 			else if (val > this.TotalPage) this.current = this.TotalPage;
 			this.$emit("index-change", this.current);
@@ -51,6 +50,11 @@ export default {
 		},
 		pageIndex(val) {
 			this.current = val;
+		},
+		skipIndex(val, old) {
+			if (isNaN(val)) {
+				this.skipIndex = old;
+			}
 		},
 	},
 	computed: {

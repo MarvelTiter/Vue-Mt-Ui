@@ -1,8 +1,7 @@
 <template>
 	<div id="app" v-mt-loading="loading">
-		<button @click="handleClick">
-			Toggle render
-		</button>
+		<mt-button @click="handleClick" accept-key="a">测试</mt-button>
+
 		<mt-table :source="data" @select-change="selectHandle">
 			<MtTableColumn type="selection" width="80"></MtTableColumn>
 			<MtTableColumn prop="name" label="姓名"></MtTableColumn>
@@ -25,7 +24,6 @@
 			</mt-uniform-grid>
 		</mt-uniform-grid>
 		<!-- <mt-select label="号牌种类" v-model="HPZL" :data="HPZLList"></mt-select> -->
-
 	</div>
 </template>
 <script>
@@ -110,7 +108,7 @@ export default {
 			JYJG: "#",
 			data: [],
 			CZY: "",
-			date: null,
+			date: "2020-9-1",
 		};
 	},
 	watch: {

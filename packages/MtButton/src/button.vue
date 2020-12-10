@@ -32,25 +32,38 @@ export default {
 			default: "button",
 		},
 		acceptEnter: Boolean,
+		acceptKey: String,
 	},
 	components: {
 		MtIcon,
 	},
 	computed: {},
-	components: {},
 	methods: {
 		handleClick(e) {
 			this.$emit("click", e);
 		},
-	},
-	mounted() {
-		if (this.acceptEnter) {
-			window.addEventListener("keydown", (e) => {
-				if (e.keyCode === 13) {
+		InputStatus() {
+			var nodes = document.querySelector(":focus");
+			return nodes != null;
+		},
+		keyEvent(e) {
+			var isOnInput = this.InputStatus();
+			if (this.acceptEnter) {
+				if (e.keyCode === 13) this.$emit("click", e);
+			} else if (this.acceptKey) {
+				if (isOnInput) return;
+				var kc = this.acceptKey.toUpperCase().charCodeAt(0);
+				if (e.keyCode === kc) {
 					this.$emit("click", e);
 				}
-			});
-		}
+			}
+		},
+	},
+	mounted() {
+		window.addEventListener("keydown", this.keyEvent);
+	},
+	destroyed() {
+		window.removeEventListener("keydown", this.keyEvent);
 	},
 };
 </script>
@@ -119,7 +132,7 @@ export default {
 			color: #fff;
 		}
 	}
-	
+
 	&.medium {
 		padding: 9px 14px;
 		font-size: 12px;
