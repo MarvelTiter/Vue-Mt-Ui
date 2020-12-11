@@ -4,12 +4,18 @@
 		<div class="mt-input__prepend" v-if="IsPrepended">
 			<slot name="preSlot">{{ prefix }}</slot>
 		</div>
-		<input :class="{'mt-input__inner':true,prepended:IsPrepended}" :style="style" :type="type" :placeholder="holder" v-model="content" @input="valueChanged" @keyup="handleKeyup" @focus="handleFocus" :disabled="disabled" autocomplete="off" :readonly="readonly" />
-		<slot></slot>
+		<div style="position:relative;">
+			<span class="mt-input__prefix" :class="{preicon:preIcon,suficon:sufIcon}">
+				<mt-icon :name="icon"></mt-icon>
+			</span>
+			<input :class="{'mt-input__inner':true,prepended:IsPrepended,preicon:preIcon,suficon:sufIcon}" :style="style" :type="type" :placeholder="holder" v-model="content" @input="valueChanged" @keyup="handleKeyup" @focus="handleFocus" :disabled="disabled" autocomplete="off" :readonly="readonly" />
+			<slot></slot>
+		</div>
 	</div>
 </template>
 
 <script>
+import MtIcon from "./../../MtIcon";
 export default {
 	name: "MtInput",
 	props: {
@@ -17,7 +23,9 @@ export default {
 		prefix: String,
 		disabled: Boolean,
 		readonly: Boolean,
-		type:String,
+		preIcon: String,
+		sufIcon: String,
+		type: String,
 		placeholder: {
 			type: String,
 			default: "",
@@ -44,6 +52,7 @@ export default {
 			else this.content = val;
 		},
 	},
+	components: { MtIcon },
 	computed: {
 		style: function () {
 			var s = {};
@@ -60,6 +69,10 @@ export default {
 		HasLabel() {
 			if (this.label) return true;
 			else return false;
+		},
+		icon() {
+			if (this.preIcon) return this.preIcon;
+			else return this.sufIcon;
 		},
 	},
 	methods: {
@@ -90,6 +103,20 @@ export default {
 		width: 1px;
 		white-space: nowrap;
 		padding: 0 10px 0 20px;
+	}
+	.mt-input__prefix {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		color: #c0c4cc;
+		width: 25px;
+		text-align: center;
+		&.preicon {
+			left: 5px;
+		}
+		&.suficon {
+			right: 5px;
+		}
 	}
 }
 .mt-input-group {
@@ -127,6 +154,12 @@ export default {
 			display: table-cell;
 			border-top-left-radius: 0;
 			border-bottom-left-radius: 0;
+		}
+		&.preicon {
+			padding-left: 30px;
+		}
+		&.sufIcon {
+			padding-right: 30px;
 		}
 		&:focus {
 			border: 1px solid #409eff;

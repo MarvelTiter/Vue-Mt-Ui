@@ -67,6 +67,8 @@
 5. type 原生属性
 6. placeholder 原生属性
 7. width 组件宽度
+8. pre-icon 前缀图标
+9. suf-icon 后缀图标
 
 ## 8. Loading
 ```html

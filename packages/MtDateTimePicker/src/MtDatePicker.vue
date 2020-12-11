@@ -2,7 +2,7 @@
 	<div class="mt-date-picker">
 		<div class="mt-date-picker-wrap" @mouseover="active = true" @mouseout="active = false">
 			<!-- <input class="mt-input__inner" placeholder="选择日期" @focus="show" v-model="content" :style="style" /> -->
-			<mt-input placeholder="选择日期" @focus="show" v-model="content" :width="width" :label="label" :disabled="disabled">
+			<mt-input placeholder="选择日期" @focus="show" v-model="content" :width="width" :label="label" readonly :disabled="disabled" pre-icon="date">
 				<div class="mt-date-picker-panel" :class="{ panelvisible: itemShow }">
 					<div class="header">
 						<div class="arrow pre" @click="preMonth"></div>

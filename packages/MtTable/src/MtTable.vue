@@ -69,6 +69,7 @@ export default {
 		},
 		source(newValue) {
 			this.data = newValue;
+			this.ChangeState(false);
 		},
 	},
 	components: {
@@ -149,6 +150,7 @@ export default {
 		if (this.columns.length === 0) {
 			this.InitColumns();
 		}
+		this.ChangeState(false);
 	},
 };
 </script>
