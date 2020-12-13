@@ -16,7 +16,6 @@ import MtUniformGrid from "./../packages/MtUniformGrid";
 import MtMessage from "./../packages/MtMessage";
 import MtCard from "./../packages/MtCard";
 import { MtTable, MtTableColumn } from "./../packages/MtTable";
-import { VTable, VColumn } from "./../packages/table";
 
 Vue.use(MtInput);
 Vue.use(MtCard);
@@ -31,8 +30,6 @@ Vue.use(MtDialog);
 Vue.use(MtUniformGrid);
 Vue.use(MtTable);
 Vue.use(MtTableColumn);
-Vue.use(VTable);
-Vue.use(VColumn);
 Vue.config.productionTip = false;
 Vue.$message = MtMessage;
 new Vue({

@@ -2,7 +2,7 @@
 	<div id="app" v-mt-loading="loading">
 		<mt-button @click="handleClick" accept-key="a">测试</mt-button>
 
-		<!-- <mt-table :source="data" @select-change="selectHandle">
+		<mt-table :source="data" @select-change="selectHandle">
 			<MtTableColumn type="selection" width="80"></MtTableColumn>
 			<MtTableColumn prop="name" label="姓名"></MtTableColumn>
 			<MtTableColumn prop="age" label="年龄" sortable></MtTableColumn>
@@ -22,7 +22,7 @@
 			<mt-uniform-grid :column="1">
 				<mt-button type="primary">查询(Enter)</mt-button>
 			</mt-uniform-grid>
-		</mt-uniform-grid> -->
+		</mt-uniform-grid>
 		<mt-input pre-icon="arrow3" label="测试"></mt-input>
 		<mt-select :data="JYJGList" label="检验机构"></mt-select>
 		<mt-date-picker></mt-date-picker>
