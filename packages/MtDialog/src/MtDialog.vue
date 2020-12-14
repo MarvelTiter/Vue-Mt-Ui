@@ -1,7 +1,7 @@
 <template>
 	<transition name="fade">
-		<div class="mt-dialog-wrapper" v-show="show" style="z-index: 2001" @click.self="close">
-			<div class="mt-dialog" style="margin-top: 15vh" :style="style">
+		<div class="mt-dialog-wrapper" v-show="show" style="z-index: 2001" @click.self="blankClose">
+			<div class="mt-dialog" :style="style">
 				<div class="mt-dialog-header" :class="{ 'mt-dialog-center': isCenter }">
 					<slot name="header">
 						<span class="mt-dialog-title">{{ digTitle }}</span>
@@ -41,6 +41,7 @@ export default {
 			type: String,
 			default: "50%",
 		},
+		abortOutOfAreaClick: Boolean,
 	},
 	data: function () {
 		return {
@@ -65,6 +66,7 @@ export default {
 		style: function () {
 			var s = {};
 			s.width = this.width;
+			s["margin-top"] = this.top;
 			return s;
 		},
 	},
@@ -72,6 +74,11 @@ export default {
 		close: function () {
 			this.show = false;
 			this.$emit("update:visible", this.show);
+		},
+		blankClose() {
+			if (!this.abortOutOfAreaClick) {
+				this.close();
+			}
 		},
 	},
 };

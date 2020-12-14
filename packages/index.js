@@ -16,6 +16,7 @@ import MtUniformGrid from "./MtUniformGrid";
 import MtMessage from "./MtMessage";
 import MtButton from "./MtButton";
 import { MtTable, MtTableColumn } from "./MtTable";
+import MtUpload from './MtUpload';
 const components = [
     MtCard,
     MtDateTimePicker,
@@ -33,6 +34,7 @@ const components = [
     MtTable,
     MtTableColumn,
     MtButton,
+    MtUpload,
 ];
 const install = function(Vue) {
     if (install.installed) return;
@@ -62,4 +64,5 @@ export default {
     MtTable,
     MtTableColumn,
     MtButton,
+    MtUpload,
 };
