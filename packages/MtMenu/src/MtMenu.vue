@@ -1,23 +1,20 @@
 <template>
-	<div class="mt-tree">
+	<div class="mt-menu">
 		<ul v-for="(m,key) in nodeList" :key="key">
-			<mt-tree-item :data="m" :level="1" :checkbox="checkbox" :label="label" :value="value"></mt-tree-item>
+			<mt-menu-item :data="m" :level="1"></mt-menu-item>
 		</ul>
 	</div>
 </template>
 <script>
-import MtTreeItem from "./MtTreeItem.vue";
+import MtMenuItem from "./MtMenuItem.vue";
 export default {
-	name: "MtTree",
+	name: "MtMenu",
 	provide() {
 		return {
 			root: this,
 		};
 	},
 	props: {
-		label: String,
-		value: String,
-		checkbox: Boolean,
 		nodes: {
 			type: [Array, Object],
 			required: true,
@@ -30,7 +27,8 @@ export default {
 	data() {
 		return {
 			nodeList: this.nodes,
-			selected: [],
+			activeItem: {},
+			activePath: "",
 			left: this.leftSpace,
 		};
 	},
@@ -41,38 +39,24 @@ export default {
 		nodes(newValue) {
 			this.nodeList = newValue;
 		},
-		selected(list) {
-			this.$emit("select-node", list);
-		},
 	},
 	computed: {},
 	components: {
-		MtTreeItem,
+		MtMenuItem,
 	},
-	methods: {
-		addNodes(item) {
-			var index = this.selected.indexOf(item);
-			if (index == -1) this.selected.push(item);
-		},
-		removeNodes(item) {
-			var index = this.selected.indexOf(item);
-			if (index > -1) {
-				this.selected.splice(index, 1);
-			}
-		},
-	},
+	methods: {},
 	mounted() {},
 };
 </script>
 <style scoped>
-.mt-tree {
+.mt-menu {
 	text-align: left;
 }
-.mt-tree ul {
+.mt-menu ul {
 	height: 100%;
 	transition: all 0.2s;
 }
-.mt-tree ul li {
+.mt-menu ul li {
 	box-sizing: border-box;
 }
 </style>

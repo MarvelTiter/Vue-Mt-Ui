@@ -1,82 +1,169 @@
-# 自用VueUI组件
+# 自用 VueUI 组件
 
 ## 1. Button 按钮
+
 ```html
 <mt-button>content</mt-button>
 ```
+
 ### props
-1. type: default / primary / info / text
-2. size: mediun / small / mini
-3. icon
-4. accept-enter (是否响应Enter)
-5. accept-key (是否响应某个按钮，优先级低于Enter)
+
+|     属性     |                 说明                 |  默认值   |
+| :----------: | :----------------------------------: | :-------: |
+|     type     | 类型 default / primary / info / text |   info    |
+|     size     |      大小 mediun / small / mini      |  normal   |
+|     icon     |                                      |           |
+| accept-enter |            是否响应 Enter            |   false   |
+|  accept-key  |  是否响应某个按钮，优先级低于 Enter  | undefined |
+
+### event
+
+| 事件  |   说明   |   参数    |
+| :---: | :------: | :-------: |
+| click | 点击事件 | eventArgs |
+
+---
 
 ## 2. Card 卡片布局
+
 ```html
 <mt-card>content</mt-card>
 ```
 
+### slot
+
+|  名字   |   说明   |
+| :-----: | :------: |
+| default |   body   |
+| header  | 标题显示 |
+
+---
+
 ## 3. DatePicker 日期选择器
+
 ```html
 <mt-date-picker></mt-date-picker>
 ```
+
 ### props
-1. width 组件宽度
-2. label 前置label显示
-3. disabled 是否启用
-4. format 值格式化字符串 (yyyy-MM-dd)
+
+|   属性   |      说明      |   默认值   |
+| :------: | :------------: | :--------: |
+|  width   |      宽度      |    100%    |
+|  label   |    前缀显示    |            |
+| disabled |    是否启用    |    true    |
+|  format  | 值格式化字符串 | yyyy-MM-dd |
+
+---
 
 ## 4. Dialog 模态窗口
+
 ```html
 <mt-dialog>content</mt-dialog>
 ```
+
 ### props
-1. title 标题
-2. top 顶部距离 (15vh)
-3. center 标题位置(默认居中)
-4. visible 是否显示
-5. width dialog宽度(默认50%)
+
+|  属性   |   说明   | 默认值 |
+| :-----: | :------: | :----: |
+|  title  |   标题   |        |
+|   top   | 顶部距离 |  15vh  |
+| center  | 标题位置 | center |
+| visible | 是否显示 | false  |
+|  width  |   宽度   |  50%   |
+
+### slot
+
+|  名字   |   说明   |
+| :-----: | :------: |
+| default |   body   |
+| header  | 标题显示 |
+
+---
 
 ## 5. Dot 悬浮触点
+
 ```html
 <mt-dot>content</mt-dot>
 ```
+
 ### props
-1. left 左边距
-2. top 上边距
+
+| 属性 |  说明  | 默认值 |
+| :--: | :----: | :----: |
+| left | 左边距 | 默认值 |
+| top  | 上边距 | 默认值 |
+
+### slot
+
+|  名字   | 说明 |
+| :-----: | :--: |
+| default | body |
+
+---
 
 ## 6. ImagePreview 图片查看
+
 ```html
 <mt-image-preview></mt-image-preview>
 ```
+
 ### props
-1. image-list 数据源
-2. visible 是否显示
-3. activeIndex 当前页
-4. src 图片路径对应的属性
+
+|    属性     |        说明        | 默认值 |
+| :---------: | :----------------: | :----: |
+| image-list  |       数据源       |        |
+|   visible   |      是否显示      | false  |
+| activeIndex |       当前页       |        |
+|     src     | 图片路径对应的属性 |        |
+
+### slot
+
+|  名字   |    说明    |
+| :-----: | :--------: |
+| default | 当前项说明 |
+
+---
 
 ## 7. Input 输入框
+
 ```html
 <mt-input></mt-input>
 ```
+
 ### props
-1. label 前置label
-2. prefix 前缀
-3. disabled 原生属性
-4. readonly 原生属性
-5. type 原生属性
-6. placeholder 原生属性
-7. width 组件宽度
-8. pre-icon 前缀图标
-9. suf-icon 后缀图标
+
+|    属性     |   说明   | 默认值 |
+| :---------: | :------: | :----: |
+|    label    | 前缀说明 |        |
+|   prefix    |   前缀   |        |
+|  disabled   | 原生属性 | false  |
+|  readonly   | 原生属性 | false  |
+|    type     | 原生属性 |        |
+| placeholder | 原生属性 |        |
+|    width    | 组件宽度 |  100%  |
+|  pre-icon   | 前缀图标 |        |
+|  suf-icon   | 后缀图标 |        |
+
+### event
+
+| 事件  |   说明   |   参数    |
+| :---: | :------: | :-------: |
+| input | 输入事件 |   text    |
+| focus | 获得焦点 | eventArgs |
+| keyup | 键盘输入 | eventArgs |
+
+---
 
 ## 8. Loading
+
 ```html
 <div v-mt-loading="loading"></div>
 ```
 
 ## 9. Message
-``` JavaScript
+
+```JavaScript
 this.$tips.success(msg)
 
 this.$tips.error(msg)
@@ -89,61 +176,109 @@ this.$tips({
 ```
 
 ## 10. Pagination 分页组件
+
 ```html
 <mt-pagination></mt-pagination>
 ```
+
 ### props
-1. page-index
-2. page-size
-3. total
+
+|    属性    |   说明   | 默认值 |
+| :--------: | :------: | :----: |
+| page-index |  当前页  |        |
+| page-size  | 每页数量 |        |
+|   total    | 数据总数 |        |
+
 ### event
-1. index-change
+
+|     事件      |     说明     |   参数   |
+| :-----------: | :----------: | :------: |
+| @index-change | 页数变更函数 | newIndex |
+
+---
 
 ## 11. Select
+
 ```html
 <mt-select></mt-select>
 ```
+
 ### props
-1. label 前置label
-2. data 数据源
-3. optionLabel option显示值
-4. optionValue option值
-5. filtable 是否可筛选(默认false)
-6. width 组件宽度
-7. disabled 是否启用
+
+|    属性     |     说明      | 默认值 |
+| :---------: | :-----------: | :----: |
+|    label    |   前缀说明    |        |
+|    data     |    数据源     |        |
+| optionLabel | option 显示值 |  text  |
+| optionValue |   option 值   | value  |
+|  filtable   |  是否可筛选   | false  |
+|    width    |   组件宽度    |  100%  |
+|  disabled   |   是否启用    | false  |
+
+---
 
 ## 12. Table 组件
-``` HTML
+
+```HTML
 <mt-table>
     <mt-table-column></mt-table-column>
 </mt-table>
 ```
-### table props
-1. column 列配置(优先级高于Template描述)
-2. source 数据源
-3. show-title 是否显示title属性(默认false)
-4. empty-text 空数据时显示内容(默认'暂无数据')
-5. stripe 隔行变色(默认true)
-6. border 显示边框(默认true)
-7. ellipsis 内容溢出隐藏(默认true)
+
+### table
+
+#### props
+
+|    属性    |        说明         |  默认值  |
+| :--------: | :-----------------: | :------: |
+|   column   |       列配置        |          |
+|   source   |       数据源        |          |
+| show-title | 是否显示 title 属性 |  false   |
+| empty-text |  空数据时显示内容   | 暂无数据 |
+|   stripe   |      隔行变色       |   true   |
+|   border   |      显示边框       |   true   |
+|  ellipsis  |    内容溢出隐藏     |   true   |
+
+#### event
+
+|      事件      |  说明  |   参数   |
+| :------------: | :----: | :------: |
+| @select-change | 选择列 | 已选列数 |
 
 ### column props
-1. prop 列内容
-2. label 列标题
-3. width 列宽度
-4. sortable 是否可排序
-5. align 内容位置(left/center/right,默认center)
-6. type 列类型(index/selection/extend(未实现))
+
+|   属性   |                 说明                  | 默认值 |
+| :------: | :-----------------------------------: | :----: |
+|   prop   |                列内容                 |        |
+|  label   |                列标题                 |        |
+|  width   |                列宽度                 |        |
+| sortable |              是否可排序               | false  |
+|  align   |      内容位置 left/center/right       | center |
+|   type   | 列类型 index/selection/extend(未实现) | 默认值 |
+
+### column slot
+
+|  名字   |  说明  |
+| :-----: | :----: |
+| default | 列模板 |
+
+---
 
 ## 13. Tree 组件
+
 ```html
 <mt-tree></mt-tree>
 ```
+
 ### props
-1. nodes 节点
-2. left-space 左顶格宽度
+
+|    属性    |    说明    | 默认值 |
+| :--------: | :--------: | :----: |
+|   nodes    |    节点    |        |
+| left-space | 左缩进宽度 |  10px  |
 
 ## 14. UniformGrid
+
 ```HTML
 <mt-uniform-grid :column="6">
     <mt-uniform-grid :column="2" :colspan="4">
@@ -163,7 +298,48 @@ this.$tips({
 ```
 
 ### props
-1. gutter 间隔 默认0
-2. column 列数 默认5
-3. rowspan
-4. colspan
+
+|  属性   | 说明 | 默认值 |
+| :-----: | :--: | :----: |
+| gutter  | 间隔 |   0    |
+| column  | 列数 |   5    |
+| rowspan |      |
+| colspan |      |
+
+### slot
+
+|  名字   | 说明 |
+| :-----: | :--: |
+| default | body |
+
+## Upload
+
+```html
+<mt-upload> </mt-upload>
+```
+
+### props
+
+|     属性     |       说明       |   默认值    |
+| :----------: | :--------------: | :---------: |
+|    accept    |     接受类型     |     \*      |
+|   multiple   |       多选       |    false    |
+|  autoUpload  | 选择完成自动上传 |    false    |
+|    action    |     上传地址     |             |
+|    limit     |   文件数量限制   |      0      |
+|   headers    |      请求头      |     []      |
+| beforeUpload |  上传前回调函数  | return true |
+
+### event
+
+|    事件     |   说明   |           参数            |
+| :---------: | :------: | :-----------------------: |
+| on-progress | 上传进度 |    eventArgs (percent)    |
+|  on-error   | 错误回调 |         eventArgs         |
+| on-success  | 成功回调 | response,rawFile,fileList |
+
+### slot
+
+| 名字 |   说明   |
+| :--: | :------: |
+| tip  | 上传描述 |

@@ -8,7 +8,7 @@
 			<span class="mt-input__prefix" :class="{preicon:preIcon,suficon:sufIcon}">
 				<mt-icon :name="icon"></mt-icon>
 			</span>
-			<input :class="{'mt-input__inner':true,prepended:IsPrepended,preicon:preIcon,suficon:sufIcon}" :style="style" :type="type" :placeholder="holder" v-model="content" @input="valueChanged" @keyup="handleKeyup" @focus="handleFocus" :disabled="disabled" autocomplete="off" :readonly="readonly" />
+			<input :class="{'mt-input__inner':true,prepended:IsPrepended,preicon:preIcon,suficon:sufIcon}" :style="style" :type="type" :placeholder="holder" v-model="content" @input="valueChanged" @keyup="handleKeyup" @focus="handleFocus" @blur="handleBlur" :disabled="disabled" autocomplete="off" :readonly="readonly" />
 			<slot></slot>
 		</div>
 	</div>
@@ -85,6 +85,9 @@ export default {
 		},
 		handleKeyup(e) {
 			this.$emit("keyup", e);
+		},
+		handleBlur(e) {
+			this.$emit("blur", e);
 		},
 	},
 	mounted() {

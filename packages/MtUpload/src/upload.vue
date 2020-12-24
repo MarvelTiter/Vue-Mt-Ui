@@ -2,7 +2,7 @@
 	<div class="mt-upload">
 		<input type="file" hidden ref="file" @change="selectedFile" :multiple="multiple" />
 		<div style="text-align:left;">
-			<mt-button @click="handleClick" type="primary">选择文件</mt-button>
+			<mt-button @click="handleClick" type="primary" :disabled="files.length === limit">选择文件</mt-button>
 			<mt-button v-if="!autoUpload" @click="upload" type="info">上传</mt-button>
 			<slot name="tip"></slot>
 		</div>
@@ -15,6 +15,9 @@
 						{{f.process | Format}}
 					</span>
 					<span>{{f.file.name}}</span>
+					<span class="close" @click="remove(f)">
+						<MtIcon name="error"></MtIcon>
+					</span>
 				</li>
 			</ul>
 		</div>
@@ -35,6 +38,14 @@ export default {
 		action: String,
 		limit: Number,
 		headers: Array,
+		beforeUpload: {
+			type: Function,
+			default: function () {
+				return function () {
+					return true;
+				};
+			},
+		},
 	},
 	data() {
 		return {
@@ -44,7 +55,6 @@ export default {
 	},
 	filters: {
 		Format(value) {
-			console.log(value);
 			return value.toFixed(0) + "%";
 		},
 	},
@@ -58,12 +68,13 @@ export default {
 					if (e.percent >= 100) {
 						file.done = true;
 					}
+					this.$emit("on-progress", e);
 				},
 				onError: (e) => {
 					this.$emit("on-error", e);
 				},
 				onSuccess: (res) => {
-					this.$emit("on-success", res);
+					this.$emit("on-success", res, file, this.files);
 				},
 				headers: this.headers,
 				action: this.action,
@@ -76,6 +87,8 @@ export default {
 			this.uploader.click();
 		},
 		upload() {
+			var check = this.beforeUpload(this.files);
+			if (!check) return;
 			this.files.map((f) => {
 				if (f.done) return;
 				this.post(f);
@@ -85,8 +98,19 @@ export default {
 			var opt = this.GetUploadOption(file);
 			AjaxFile(opt);
 		},
+		remove(file) {
+			var index = this.files.indexOf(file);
+			if (index > -1) {
+				this.files.splice(index, 1);
+				this.$emit("on-remove", file, this.files);
+			}
+		},
 		selectedFile() {
 			var fs = this.uploader.files;
+			if (fs.length + this.files.length > this.limit) {
+				alert("选择文件数量超出限制!");
+				return;
+			}
 			fs.forEach((f) => {
 				if (!this.exit(f)) {
 					this.files.push({
@@ -128,12 +152,24 @@ export default {
 		margin-left: 5px;
 	}
 
-	.right * {
-		font-size: 12px;
+	.right {
+		* {
+			font-size: 12px;
+		}
 	}
 
 	.done {
 		color: #67c23a;
+	}
+	.close {
+		margin-left: 20px;
+		* {
+			font-size: 12px;
+		}
+		&:hover {
+			cursor: pointer;
+			color: crimson;
+		}
 	}
 }
 </style>

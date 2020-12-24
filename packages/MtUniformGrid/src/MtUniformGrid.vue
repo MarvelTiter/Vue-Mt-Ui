@@ -106,7 +106,12 @@ export default {
 		},
 		CellSpan(row, col) {
 			var node = this.SelectNode(row, col);
-			if (node.child === undefined) {
+			if (
+				node === undefined ||
+				node === null ||
+				node.child === undefined ||
+				node.child === null
+			) {
 				return { col: 1, row: 1 };
 			}
 			var c = node.child.colspan;
@@ -139,7 +144,7 @@ export default {
 .mt-uniform-grid .cell {
 	border: none;
 	vertical-align: middle;
-	text-align: center;	
+	text-align: center;
 	position: relative;
 }
 </style>

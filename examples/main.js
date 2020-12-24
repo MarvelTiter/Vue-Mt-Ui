@@ -10,6 +10,7 @@ import MtPagination from "./../packages/MtPagination";
 import MtLoading from "./../packages/MtLoading";
 import MtIcon from "./../packages/MtIcon";
 import MtTree from "./../packages/MtTree";
+import MtMenu from "./../packages/MtMenu";
 import MtDot from "./../packages/MtDot";
 import MtDialog from "./../packages/MtDialog";
 import MtUniformGrid from "./../packages/MtUniformGrid";
@@ -17,6 +18,8 @@ import MtMessage from "./../packages/MtMessage";
 import MtCard from "./../packages/MtCard";
 import { MtTable, MtTableColumn } from "./../packages/MtTable";
 import MtUpload from './../packages/MtUpload';
+import MtImagePreview from './../packages/MtImagePreview';
+import MtLabelInput from './../packages/MtLabelInput';
 
 Vue.use(MtInput);
 Vue.use(MtCard);
@@ -32,6 +35,9 @@ Vue.use(MtUniformGrid);
 Vue.use(MtTable);
 Vue.use(MtTableColumn);
 Vue.use(MtUpload);
+Vue.use(MtImagePreview);
+Vue.use(MtMenu);
+Vue.use(MtLabelInput);
 Vue.config.productionTip = false;
 Vue.$message = MtMessage;
 new Vue({

@@ -456,5 +456,553 @@ export default {
         { value: "Z52", text: "重型载货专项作业车" },
         { value: "Z71", text: "轻型非载货专项作业车" },
         { value: "Z72", text: "轻型载货专项作业车" }
+    ],
+    MenuList: [
+        {
+            title: "基础功能",
+            icon: "menu",
+            path: null,
+            children: [
+                {
+                    title: "用户管理",
+                    icon: "user\r\n",
+                    path: "BaseManage/UserList.aspx",
+                    children: []
+                },
+                {
+                    title: "角色管理",
+                    icon: "ums-role",
+                    path: "BaseManage/RoleList.aspx",
+                    children: []
+                },
+                {
+                    title: "设备管理",
+                    icon: "deviceshare",
+                    path: "BaseManage/DeviceList.aspx",
+                    children: []
+                },
+                {
+                    title: "日志管理",
+                    icon: "log",
+                    path: "BaseManage/LogListEx.aspx",
+                    children: []
+                },
+                {
+                    title: "查验员管理",
+                    icon: "user",
+                    path: "BaseManage/StationUser.aspx",
+                    children: []
+                },
+                {
+                    title: "系统配置",
+                    icon: "Settingscontroloptions",
+                    path: "BaseManage/SystemSetting.html",
+                    children: []
+                },
+                {
+                    title: "系统状态监控",
+                    icon: "statusiconpendingactivations",
+                    path: "BaseManage/SystemStatus.aspx",
+                    children: []
+                },
+                {
+                    title: "机构状态监控",
+                    icon: "statusiconpendingactivations",
+                    path: "BaseManage/StationStatus.aspx",
+                    children: []
+                }
+            ]
+        },
+        {
+            title: "业务功能",
+            icon: "yewu",
+            path: null,
+            children: [
+                {
+                    title: "检验视频",
+                    icon: "yewu",
+                    path: null,
+                    children: [
+                        {
+                            title: "视频记录查询",
+                            icon: "querylist",
+                            path: "BusinessManage/DetectList.aspx",
+                            children: []
+                        },
+                        {
+                            title: "视频上传统计",
+                            icon: "Cloudupload",
+                            path: "BusinessManage/UploadRateStatistics.aspx",
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    title: "执法视频",
+                    icon: "yewu",
+                    path: null,
+                    children: [
+                        {
+                            title: "执法记录查询",
+                            icon: "querylist",
+                            path: "BusinessManage/DetectListZFJLY.aspx",
+                            children: []
+                        },
+                        {
+                            title: "执法时长统计",
+                            icon: "time",
+                            path: "BusinessManage/RecorderWorkStatistics.aspx",
+                            children: []
+                        },
+                        {
+                            title: "执法上传统计",
+                            icon: "Cloudupload",
+                            path:
+                                "BusinessManage/UploadRateStatisticsZFJLY.aspx",
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    title: "电子地图",
+                    icon: "map",
+                    path: "MapTiles.aspx",
+                    children: []
+                },
+                {
+                    title: "预警信息查询",
+                    icon: "warning",
+                    path: "BusinessManage/WarnListEx.aspx",
+                    children: []
+                },
+                {
+                    title: "文件管理",
+                    icon: "files",
+                    path: "BusinessManage/FileList.aspx",
+                    children: []
+                },
+                {
+                    title: "视频大小统计",
+                    icon: "box",
+                    path: "BusinessManage/VideoSizeStatistics.aspx",
+                    children: []
+                },
+                {
+                    title: "预警统计",
+                    icon: "warning",
+                    path: "BusinessManage/WarningStatisics.aspx",
+                    children: []
+                }
+            ]
+        }
+    ],
+    PowerList: [
+        {
+            Power: {
+                QXBH: "01",
+                QXMC: "基础功能",
+                SJQXBH: "0",
+                QXLX: "menu",
+                QXJB: 0,
+                CJSJ: "0001-01-01 00:00:00",
+                BZ: null,
+                NavigateUrl: null,
+                ImageUrl: null,
+                Enable: 1,
+                SortId: 0,
+                icon: "menu",
+                path: null
+            },
+            children: [
+                {
+                    Power: {
+                        QXBH: "001",
+                        QXMC: "用户管理",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/UserList.aspx",
+                        ImageUrl: "~/images/icon/user.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "user\r\n",
+                        path: "BaseManage/UserList.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "002",
+                        QXMC: "角色管理",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/RoleList.aspx",
+                        ImageUrl: "~/images/icon/user.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "ums-role",
+                        path: "BaseManage/RoleList.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "003",
+                        QXMC: "设备管理",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/DeviceList.aspx",
+                        ImageUrl: "~/images/icon/video.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "deviceshare",
+                        path: "BaseManage/DeviceList.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "004",
+                        QXMC: "日志管理",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/LogListEx.aspx",
+                        ImageUrl: "~/images/icon/log.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "log",
+                        path: "BaseManage/LogListEx.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "028",
+                        QXMC: "查验员管理",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: null,
+                        ImageUrl: null,
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "user",
+                        path: "BaseManage/StationUser.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "0060",
+                        QXMC: "系统配置",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/SystemConfig.aspx",
+                        ImageUrl: "~/images/icon/system.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "Settingscontroloptions",
+                        path: "BaseManage/SystemSetting.html"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "0061",
+                        QXMC: "系统状态监控",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/SystemStatus.aspx",
+                        ImageUrl: "~/images/icon/system_monitor.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "statusiconpendingactivations",
+                        path: "BaseManage/SystemStatus.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "0063",
+                        QXMC: "机构状态监控",
+                        SJQXBH: "01",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BaseManage/StationStatus.aspx",
+                        ImageUrl: "~/images/icon/system_monitor.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "statusiconpendingactivations",
+                        path: "BaseManage/StationStatus.aspx"
+                    },
+                    children: []
+                }
+            ]
+        },
+        {
+            Power: {
+                QXBH: "02",
+                QXMC: "业务功能",
+                SJQXBH: "0",
+                QXLX: "menu",
+                QXJB: 0,
+                CJSJ: "0001-01-01 00:00:00",
+                BZ: null,
+                NavigateUrl: null,
+                ImageUrl: null,
+                Enable: 1,
+                SortId: 1,
+                icon: "yewu",
+                path: null
+            },
+            children: [
+                {
+                    Power: {
+                        QXBH: "20",
+                        QXMC: "检验视频",
+                        SJQXBH: "02",
+                        QXLX: "menu",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: null,
+                        ImageUrl: null,
+                        Enable: 1,
+                        SortId: 2,
+                        icon: "yewu",
+                        path: null
+                    },
+                    children: [
+                        {
+                            Power: {
+                                QXBH: "005",
+                                QXMC: "视频记录查询",
+                                SJQXBH: "20",
+                                QXLX: "page",
+                                QXJB: 1,
+                                CJSJ: "0001-01-01 00:00:00",
+                                BZ: null,
+                                NavigateUrl: "~/BusinessManage/DetectList.aspx",
+                                ImageUrl: "~/images/icon/car.png",
+                                Enable: 1,
+                                SortId: 99,
+                                icon: "querylist",
+                                path: "BusinessManage/DetectList.aspx"
+                            },
+                            children: []
+                        },
+                        {
+                            Power: {
+                                QXBH: "026",
+                                QXMC: "视频上传统计",
+                                SJQXBH: "20",
+                                QXLX: "page",
+                                QXJB: 1,
+                                CJSJ: "0001-01-01 00:00:00",
+                                BZ: null,
+                                NavigateUrl:
+                                    "~/BusinessManage/UploadRateStatistics.aspx",
+                                ImageUrl: "~/images/icon/log.png",
+                                Enable: 1,
+                                SortId: 99,
+                                icon: "Cloudupload",
+                                path: "BusinessManage/UploadRateStatistics.aspx"
+                            },
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    Power: {
+                        QXBH: "21",
+                        QXMC: "执法视频",
+                        SJQXBH: "02",
+                        QXLX: "menu",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: null,
+                        ImageUrl: null,
+                        Enable: 1,
+                        SortId: 3,
+                        icon: "yewu",
+                        path: null
+                    },
+                    children: [
+                        {
+                            Power: {
+                                QXBH: "0051",
+                                QXMC: "执法记录查询",
+                                SJQXBH: "21",
+                                QXLX: "page",
+                                QXJB: 1,
+                                CJSJ: "0001-01-01 00:00:00",
+                                BZ: null,
+                                NavigateUrl:
+                                    "~/BusinessManage/DetectListZFJLY.aspx",
+                                ImageUrl: "~/images/icon/car.png",
+                                Enable: 1,
+                                SortId: 98,
+                                icon: "querylist",
+                                path: "BusinessManage/DetectListZFJLY.aspx"
+                            },
+                            children: []
+                        },
+                        {
+                            Power: {
+                                QXBH: "023",
+                                QXMC: "执法时长统计",
+                                SJQXBH: "21",
+                                QXLX: "page",
+                                QXJB: 1,
+                                CJSJ: "0001-01-01 00:00:00",
+                                BZ: null,
+                                NavigateUrl:
+                                    "~/BusinessManage/RecorderWorkStatistics.aspx",
+                                ImageUrl: "~/images/icon/log.png",
+                                Enable: 1,
+                                SortId: 99,
+                                icon: "time",
+                                path:
+                                    "BusinessManage/RecorderWorkStatistics.aspx"
+                            },
+                            children: []
+                        },
+                        {
+                            Power: {
+                                QXBH: "027",
+                                QXMC: "执法上传统计",
+                                SJQXBH: "21",
+                                QXLX: "page",
+                                QXJB: 1,
+                                CJSJ: "0001-01-01 00:00:00",
+                                BZ: null,
+                                NavigateUrl:
+                                    "~/BusinessManage/UploadRateStatisticsZFJLY.aspx",
+                                ImageUrl: "~/images/icon/log.png",
+                                Enable: 1,
+                                SortId: 99,
+                                icon: "Cloudupload",
+                                path:
+                                    "BusinessManage/UploadRateStatisticsZFJLY.aspx"
+                            },
+                            children: []
+                        }
+                    ]
+                },
+                {
+                    Power: {
+                        QXBH: "008",
+                        QXMC: "电子地图",
+                        SJQXBH: "02",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/MapTiles.aspx",
+                        ImageUrl: "~/images/icon/map.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "map",
+                        path: "MapTiles.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "010",
+                        QXMC: "预警信息查询",
+                        SJQXBH: "02",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BusinessManage/WarnListEx.aspx",
+                        ImageUrl: "~/images/icon/alarm.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "warning",
+                        path: "BusinessManage/WarnListEx.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "011",
+                        QXMC: "文件管理",
+                        SJQXBH: "02",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BusinessManage/FileList.aspx",
+                        ImageUrl: "~/images/icon/folder.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "files",
+                        path: "BusinessManage/FileList.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "024",
+                        QXMC: "视频大小统计",
+                        SJQXBH: "02",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl:
+                            "~/BusinessManage/VideoSizeStatistics.aspx",
+                        ImageUrl: "~/images/icon/log.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "box",
+                        path: "BusinessManage/VideoSizeStatistics.aspx"
+                    },
+                    children: []
+                },
+                {
+                    Power: {
+                        QXBH: "025",
+                        QXMC: "预警统计",
+                        SJQXBH: "02",
+                        QXLX: "page",
+                        QXJB: 1,
+                        CJSJ: "0001-01-01 00:00:00",
+                        BZ: null,
+                        NavigateUrl: "~/BusinessManage/WarningStatisics.aspx",
+                        ImageUrl: "~/images/icon/log.png",
+                        Enable: 1,
+                        SortId: 99,
+                        icon: "warning",
+                        path: "BusinessManage/WarningStatisics.aspx"
+                    },
+                    children: []
+                }
+            ]
+        }
     ]
 };

@@ -1,18 +1,18 @@
 <template>
 	<li>
-		<div class="mt-tree-item" @click.stop="handleNodeClick" :class="{actived:isActived}" :style="fontSize">
-			<div class="title-area" :style="paddingLeft">
-				<mt-icon :name="data.icon"></mt-icon>
-				<span>{{ data.title }}</span>
+		<div class="mt-tree-item" @click.stop="handleNodeClick" :style="fontSize">
+			<div class="title-area" :style="paddingLeft" :class="{actived:isActived}">
+				<input type="checkbox" v-if="checkbox" v-model="data.Checked" @click.stop />
+				<mt-icon :name="data.icon1"></mt-icon>
+				<span>{{ CalcLabel }}</span>
 				<mt-icon name="arrow3" v-if="hasChild" class="arrow" :class="{rotate:visible}"></mt-icon>
 			</div>
 			<transition name="scaley">
 				<ul class="sub-node-list" v-show="visible" v-if="hasChild">
-					<mt-tree-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index">
+					<mt-tree-item v-for="(m,index) in data.children" :data="m" :level="level+1" :key="index" :checkbox="checkbox" :label="label" :value="value">
 					</mt-tree-item>
 				</ul>
 			</transition>
-
 		</div>
 	</li>
 </template>
@@ -23,6 +23,9 @@ export default {
 	name: "MtTreeItem",
 	inject: ["root"],
 	props: {
+		label: String,
+		value: String,
+		checkbox: Boolean,
 		data: {
 			type: [Array, Object],
 			required: true,
@@ -36,9 +39,26 @@ export default {
 		return {
 			visible: true,
 			itemLevel: this.level,
-			itemName: this.data.title,
+			itemName: this.data[this.label],
 			end: false,
+			isActived: false,
 		};
+	},
+	watch: {
+		"data.Checked": function (n) {
+			this.isActived = n;
+			if (n) {
+				this.root.addNodes(this.CalcValue);
+			} else {
+				this.root.removeNodes(this.CalcValue);
+			}
+			this.CheckParent(n);
+			// if (this.hasChild) {
+			// 	this.data.children.forEach((c) => {
+			// 		c.Checked = n;
+			// 	});
+			// }
+		},
 	},
 	computed: {
 		hasChild() {
@@ -55,15 +75,33 @@ export default {
 			style["font-size"] = this.level == 1 ? "18px" : "14px";
 			return style;
 		},
-		isActived() {
-			var actived = this.root.activeItem;
-			return (
-				actived &&
-				actived.itemLevel == this.itemLevel &&
-				actived.itemName == this.itemName &&
-				!(this.data.children && this.data.children.length)
-			);
+		CalcLabel() {
+			var path = this.label.split(".");
+			var temp = this.data;
+			for (let index = 0; index < path.length; index++) {
+				const prop = path[index];
+				temp = temp[prop];
+			}
+			return temp;
 		},
+		CalcValue() {
+			var path = this.value.split(".");
+			var temp = this.data;
+			for (let index = 0; index < path.length; index++) {
+				const prop = path[index];
+				temp = temp[prop];
+			}
+			return temp;
+		},
+		// isActived() {
+		// 	var actived = this.root.activeItem;
+		// 	return (
+		// 		actived &&
+		// 		actived.itemLevel == this.itemLevel &&
+		// 		actived.itemName == this.itemName &&
+		// 		!(this.data.children && this.data.children.length)
+		// 	);
+		// },
 	},
 	components: {
 		MtIcon,
@@ -71,15 +109,22 @@ export default {
 	methods: {
 		handleNodeClick() {
 			this.visible = !this.visible;
-			if (this.hasChild) return;
-			this.root.activeItem = this;
-			this.root.activePath = this.data.path;
+			// if (this.hasChild) return;
+			// this.root.activeItem = this;
+			// this.root.activePath = this.data.path;
+		},
+		CheckParent(n) {
+			var p = this.$parent;
+			if (!p || p.$options.name != "MtTreeItem" || !n) return;
+			p.data.Checked = n;
 		},
 		handle() {
 			this.end = true;
 		},
 	},
-	mounted() {},
+	mounted() {
+		this.$set(this.data, "Checked", false);
+	},
 };
 </script>
 <style scoped>
@@ -100,7 +145,7 @@ li {
 	box-sizing: border-box;
 }
 .title-area:hover {
-	background-color: rgb(84, 92, 100);
+	/* background-color: rgb(84, 92, 100); */
 	cursor: pointer;
 }
 .mt-tree-item .arrow {
@@ -129,7 +174,7 @@ li {
 } */
 .actived {
 	color: #40e9ff;
-	text-shadow: 0px 0px 5px rgba(160, 201, 254, 1);
-	font-weight: bold;
+	text-shadow: 0px 0px 1px rgba(160, 201, 254, 1);
+	font-weight: 600;
 }
 </style>

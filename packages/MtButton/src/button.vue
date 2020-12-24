@@ -1,5 +1,5 @@
 <template>
-	<button class="mt-button" @click="handleClick" :type="nativeType" :class="[
+	<button class="mt-button" @click="handleClick" :type="nativeType" :disabled="disabled" :class="[
       size ? size :'',
       type ?  type : '',
     ]">
@@ -33,6 +33,7 @@ export default {
 		},
 		acceptEnter: Boolean,
 		acceptKey: String,
+		disabled: Boolean,
 	},
 	components: {
 		MtIcon,

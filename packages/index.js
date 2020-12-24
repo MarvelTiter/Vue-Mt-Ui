@@ -12,11 +12,14 @@ import MtSelect from "./MtSelect";
 import MtLoading from "./MtLoading";
 import MtIcon from "./MtIcon";
 import MtTree from "./MtTree";
+import MtMenu from "./MtMenu";
 import MtUniformGrid from "./MtUniformGrid";
 import MtMessage from "./MtMessage";
 import MtButton from "./MtButton";
 import { MtTable, MtTableColumn } from "./MtTable";
-import MtUpload from './MtUpload';
+import { MtRadio, MtRadioItem } from "./MtRadio";
+import MtUpload from "./MtUpload";
+import MtLabelInput from "./MtLabelInput";
 const components = [
     MtCard,
     MtDateTimePicker,
@@ -35,6 +38,10 @@ const components = [
     MtTableColumn,
     MtButton,
     MtUpload,
+    MtMenu,
+    MtRadio,
+    MtRadioItem,
+    MtLabelInput
 ];
 const install = function(Vue) {
     if (install.installed) return;
@@ -65,4 +72,8 @@ export default {
     MtTableColumn,
     MtButton,
     MtUpload,
+    MtMenu,
+    MtRadio,
+    MtRadioItem,
+    MtLabelInput
 };

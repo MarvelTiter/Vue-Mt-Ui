@@ -1,33 +1,31 @@
 <template>
 	<div id="app" v-mt-loading="loading">
-		<mt-button @click="handleClick" accept-key="a">测试</mt-button>
 
-		<!-- <mt-table :source="data" @select-change="selectHandle">
-			<MtTableColumn type="selection" width="80"></MtTableColumn>
-			<MtTableColumn prop="name" label="姓名"></MtTableColumn>
-			<MtTableColumn prop="age" label="年龄" sortable></MtTableColumn>
-			<MtTableColumn prop="address" label="地址" sortable></MtTableColumn>
-		</mt-table>
-		<mt-uniform-grid :column="6">
-			<mt-uniform-grid :column="4" :colspan="5">
-				<mt-date-picker label="开始日期" format="yyyy-MM-dd" v-model="date"></mt-date-picker>
-				<mt-date-picker label="结束日期" format="yyyy-MM-dd"></mt-date-picker>
-				<mt-select label="号牌种类" v-model="HPZL" :data="HPZLList" filtable></mt-select>
-				<mt-select label="机构名称"></mt-select>
-				<mt-input label="I P 地 址"></mt-input>
-				<mt-input label="操作人员" v-model="CZY"></mt-input>
-				<mt-input label="事件标志"></mt-input>
-				<mt-input label="事件描述"></mt-input>
-			</mt-uniform-grid>
-			<mt-uniform-grid :column="1">
-				<mt-button type="primary">查询(Enter)</mt-button>
-			</mt-uniform-grid>
-		</mt-uniform-grid> -->
-		<mt-upload multiple auto-upload :action="'https://localhost:5001/api/pic'" @on-success="uploadSuccess">
+		<!-- <mt-upload multiple auto-upload :action="'https://localhost:5001/api/pic'" @on-success="uploadSuccess" :limit="2" @on-remove="removeFile" :before-upload="beforeUpload">
 			<template v-slot:tip>
 				<span>只能上传jpg/png/gif文件(请依次上传两张)</span>
 			</template>
-		</mt-upload>
+		</mt-upload> -->
+
+		<!-- <mt-image-preview :visible.sync="visible" :image-list="data" :active-index="0">
+			<mt-button @click="handleClick">预览</mt-button>
+		</mt-image-preview> -->
+		<!-- <mt-tree :nodes="Power" @select-node="selectHandle" checkbox label="Power.QXMC" value="Power.QXBH"></mt-tree> -->
+		<!-- <mt-uniform-grid :column="6">
+			<mt-uniform-grid :column="3" :colspan="5">
+				<mt-input></mt-input>
+				<mt-input></mt-input>
+				<mt-input></mt-input>
+			</mt-uniform-grid>
+			<mt-input></mt-input>
+		</mt-uniform-grid> -->
+		<mt-label-input v-model="date"></mt-label-input>
+		<label>
+			<input type="radio" name="g1" />
+		</label>
+		<input type="radio" name="g1" />
+		<input type="radio" name="g1" />
+
 	</div>
 </template>
 <script>
@@ -109,6 +107,8 @@ export default {
 			HPZLList: TestData.HPZLList,
 			HPZL: "#",
 			JYJGList: TestData.JYJGList,
+			Menu: TestData.MenuList,
+			Power: TestData.PowerList,
 			JYJG: "#",
 			data: [],
 			CZY: "",
@@ -122,9 +122,16 @@ export default {
 	methods: {
 		nav(p) {},
 		handleClick() {
-			this.data = data;
-			this.HPZL = "01";
-			this.JYJG = "4400000254";
+			this.visible = true;
+			setTimeout(() => {
+				this.data = [
+					require("@/assets/1.gif"),
+					require("@/assets/2.jpg"),
+					require("@/assets/3.gif"),
+					require("@/assets/4.png"),
+					require("@/assets/5.gif"),
+				];
+			}, 1000);
 		},
 		show(d) {
 			return "1";
@@ -134,6 +141,13 @@ export default {
 		},
 		uploadSuccess(res) {
 			console.log(res);
+		},
+		removeFile(file, fileList) {
+			console.log("file", file);
+			console.log("file-list", fileList);
+		},
+		beforeUpload() {
+			return false;
 		},
 	},
 };
@@ -145,6 +159,8 @@ export default {
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
 	color: #2c3e50;
+	/* background-color: #2c3e50; */
+	min-height: 500px;
 }
 
 #nav {
