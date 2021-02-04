@@ -3,6 +3,9 @@
 		<div class="input-wrap" @mouseover="active = true" @mouseout="active = false">
 			<!-- <input class="mt-input__inner" placeholder="请选择" @keyup="search" v-model="currentText" @focus="show" :style="style" :disabled="disabled" /> -->
 			<mt-input placeholder="请选择" @keyup="search" v-model="currentText" :label="label" @focus="show" :width="width" :disabled="disabled" :readonly="!filtable" suf-icon="arrow3">
+				<template v-slot:preSlot>
+					{{$slots.preSlot}}
+				</template>
 				<ul class="optionWrap" :class="{ panelvisible: itemShow }">
 					<li class="optionItem" @click="handleOptionClick(s)" v-for="(s, key) of searchList" :key="key">
 						{{ s[displayMember] }}
@@ -21,7 +24,7 @@ export default {
 		label: String,
 		data: {
 			type: Array,
-			default: function(){
+			default: function () {
 				return [];
 			},
 		},
@@ -108,15 +111,20 @@ export default {
 			this.$emit("input", value);
 			this.$emit("change", val);
 			this.itemShow = false;
+			this.updateLabel();
 		},
 		close: function (e) {
 			if (!this.active) {
 				this.itemShow = false;
+				if (this.currentText == "") {
+					this.handleOptionClick(this.searchList[0]);
+				}
 				window.removeEventListener("click", this.close);
 			}
 		},
 		show: function () {
 			this.itemShow = true;
+			if (this.filtable) this.currentText = "";
 			this.searchList = this.list;
 			window.addEventListener("click", this.close);
 		},

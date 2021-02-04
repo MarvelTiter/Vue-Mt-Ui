@@ -79,6 +79,8 @@ export default {
 	methods: {
 		close: function () {
 			this.show = false;
+			var img = this.$refs["ImgBoard"];
+			img.src = "";
 		},
 		Scale: function (e) {
 			var img = this.$refs["ImgBoard"];

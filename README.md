@@ -343,3 +343,73 @@ this.$tips({
 | 名字 |   说明   |
 | :--: | :------: |
 | tip  | 上传描述 |
+
+## Checkbox CheckboxGroup
+
+```
+<mt-checkbox-group v-model="MutiSelect">
+    <mt-checkbox label="1"></mt-checkbox>
+    <mt-checkbox label="2"></mt-checkbox>
+    <mt-checkbox label="3"></mt-checkbox>
+</mt-checkbox-group>
+    <mt-checkbox label="是否XXX" :check-value="[1,0]"></mt-checkbox>
+
+```
+
+### CheckboxGroup props
+
+|   属性   |          说明          | 默认值 |
+| :------: | :--------------------: | :----: |
+| request  | 返回类型(string,array) | string |
+| disabled |        是否可用        | false  |
+
+### Cehckbox props
+
+|    属性    |            说明             | 默认值 |
+| :--------: | :-------------------------: | :----: |
+|   label    |        选项显示内容         |        |
+| checkValue | 自定义值，长度为 2 的数组， |        |
+|  disabled  |          是否可用           | false  |
+
+## LabelInput
+
+可编辑 label
+
+```
+<mt-label-input></mt-label-input>
+```
+
+### props
+
+|    属性     |         说明         |  默认值   |
+| :---------: | :------------------: | :-------: |
+|    field    |       绑定字段       |           |
+|    edit     |      是否可编辑      | undefined |
+| placeholder |     placeholder      |    ''     |
+|   showFix   | label 下是否显示修饰 |   false   |
+|   prefix    |         前缀         |           |
+|   suffix    |         后缀         |           |
+
+## Radio
+
+```
+<mt-radio>
+    <mt-radio-item label="选项1" value="1"></mt-radio-item>
+    <mt-radio-item label="选项2" value="2"></mt-radio-item>
+    <mt-radio-item label="选项3" value="3"></mt-radio-item>
+</mt-radio>
+```
+
+### Radio props
+
+|   属性   |   说明   | 默认值 |
+| :------: | :------: | :----: |
+|  title   | 前缀说明 |        |
+| disabled | 是否可用 | false  |
+
+### RadioItem props
+
+| 属性  |    说明    | 默认值 |
+| :---: | :--------: | :----: |
+| label |  选项说明  |        |
+| value | 选项选中值 |        |

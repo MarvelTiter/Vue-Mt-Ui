@@ -1,7 +1,7 @@
 <template>
 	<div class="mt-label-input">
 		<mt-input v-if="status" v-model="value" :placeholder="placeholder" @blur="endEdit" ref="input"></mt-input>
-		<label v-else class="label" :class={holder:!value} @click="labelClick">{{ showLabel }}</label>
+		<label v-else :class="[{label:true},{holder:!value}]" @click="labelClick" @focus="labelClick">{{ showLabel }}</label>
 	</div>
 </template>
 
@@ -13,6 +13,9 @@ export default {
 		field: String,
 		edit: { type: Boolean, default: undefined },
 		placeholder: String,
+		showFix: Boolean,
+		prefix: String,
+		suffix: String,
 	},
 	model: {
 		prop: "field",
@@ -25,11 +28,14 @@ export default {
 		};
 	},
 	watch: {
-		value(newValue) {
-			this.$emit("valueChange", newValue);
-		},
 		field(newValue) {
 			this.value = newValue;
+			this.$nextTick(() => {
+				this.UpdateStatus();
+			});
+		},
+		edit(newValue) {
+			this.status = newValue;
 		},
 	},
 	computed: {
@@ -40,7 +46,13 @@ export default {
 			if (!this.value && this.canEdit) {
 				return this.placeholder;
 			}
-			return this.value;
+			if (this.showFix) {
+				var v = this.value;
+				if (!v) v = "-";
+				var pre = this.prefix ? this.prefix + ":" : "";
+				var suf = this.suffix ? " " + this.suffix : "";
+				return `${pre}${v}${suf}`;
+			} else return this.value;
 		},
 	},
 	components: { MtInput },
@@ -55,10 +67,16 @@ export default {
 			}
 		},
 		endEdit() {
-			if (this.canEdit) this.status = false;
+			this.$emit("valueChange", this.value);
+			this.UpdateStatus();
+		},
+		UpdateStatus() {
+			this.status = this.canEdit && !this.value;
 		},
 	},
-	mounted() {},
+	mounted() {
+		this.UpdateStatus();
+	},
 };
 </script>
 <style scoped lang="scss">

@@ -17,9 +17,11 @@ import MtUniformGrid from "./../packages/MtUniformGrid";
 import MtMessage from "./../packages/MtMessage";
 import MtCard from "./../packages/MtCard";
 import { MtTable, MtTableColumn } from "./../packages/MtTable";
-import MtUpload from './../packages/MtUpload';
-import MtImagePreview from './../packages/MtImagePreview';
-import MtLabelInput from './../packages/MtLabelInput';
+import MtUpload from "./../packages/MtUpload";
+import MtImagePreview from "./../packages/MtImagePreview";
+import MtLabelInput from "./../packages/MtLabelInput";
+import { MtRadio, MtRadioItem } from "./../packages/MtRadio";
+import { MtCheckBoxGroup, MtCheckBox } from "./../packages/MtCheckBox";
 
 Vue.use(MtInput);
 Vue.use(MtCard);
@@ -38,6 +40,10 @@ Vue.use(MtUpload);
 Vue.use(MtImagePreview);
 Vue.use(MtMenu);
 Vue.use(MtLabelInput);
+Vue.use(MtRadio);
+Vue.use(MtRadioItem);
+Vue.use(MtCheckBoxGroup);
+Vue.use(MtCheckBox);
 Vue.config.productionTip = false;
 Vue.$message = MtMessage;
 new Vue({

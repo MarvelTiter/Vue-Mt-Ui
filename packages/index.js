@@ -18,6 +18,7 @@ import MtMessage from "./MtMessage";
 import MtButton from "./MtButton";
 import { MtTable, MtTableColumn } from "./MtTable";
 import { MtRadio, MtRadioItem } from "./MtRadio";
+import { MtCheckBoxGroup, MtCheckBox } from "./MtCheckBox";
 import MtUpload from "./MtUpload";
 import MtLabelInput from "./MtLabelInput";
 const components = [
@@ -41,7 +42,9 @@ const components = [
     MtMenu,
     MtRadio,
     MtRadioItem,
-    MtLabelInput
+    MtLabelInput,
+    MtCheckBoxGroup,
+    MtCheckBox
 ];
 const install = function(Vue) {
     if (install.installed) return;
@@ -75,5 +78,7 @@ export default {
     MtMenu,
     MtRadio,
     MtRadioItem,
-    MtLabelInput
+    MtLabelInput,
+    MtCheckBoxGroup,
+    MtCheckBox
 };

@@ -1,5 +1,6 @@
 <template>
-	<button class="mt-button" @click="handleClick" :type="nativeType" :disabled="disabled" :class="[
+	<button @click="handleClick" :type="nativeType" :disabled="disabled" :class="[
+	  {'mt-button': true},
       size ? size :'',
       type ?  type : '',
     ]">
